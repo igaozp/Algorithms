@@ -1,5 +1,7 @@
 package Find;
 
+import Base.Queue;
+
 public class SequentialSearchST<Key, Value> {
     private Node first;
 
@@ -66,5 +68,13 @@ public class SequentialSearchST<Key, Value> {
             size++;
         }
         return size;
+    }
+
+    public Iterable<Key> keys() {
+        Queue<Key> q = new Queue<>();
+        for (Node x = first; x != null; x = x.next) {
+            q.enqueue(x.key);
+        }
+        return q;
     }
 }
