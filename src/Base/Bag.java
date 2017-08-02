@@ -12,7 +12,9 @@ import java.util.Iterator;
  * @param <Item> 泛型类型
  */
 public class Bag<Item> implements Iterable<Item> {
-    // 链表的首节点
+    /**
+     * 链表的首节点
+     */
     private Node first;
 
     /**
@@ -25,7 +27,8 @@ public class Bag<Item> implements Iterable<Item> {
 
     /**
      * 添加元素
-     * @param item 向 {@code Bag} 中添加的元素
+     *
+     * @param item 添加的元素
      */
     public void add(Item item) {
         // 使用头插法插入新的元素
@@ -36,7 +39,8 @@ public class Bag<Item> implements Iterable<Item> {
     }
 
     /**
-     * 实现 {@code Iterable} 接口的 {@code iterator} 函数
+     * 实现 Iterable 接口的 iterator 函数
+     *
      * @return 迭代对象
      */
     public Iterator<Item> iterator() {
@@ -44,13 +48,14 @@ public class Bag<Item> implements Iterable<Item> {
     }
 
     /**
-     * {@code ListIterator} 用来实现 {@code Iterable} 接口
+     * 自定义 ListIterator 用来实现 Iterable 接口
      */
     private class ListIterator implements Iterator<Item> {
         private Node current = first;
 
         /**
          * 检查是否有下一个元素
+         *
          * @return {@code true} 有下一个元素
          *         {@code false} 没有下一个元素
          */
@@ -59,12 +64,14 @@ public class Bag<Item> implements Iterable<Item> {
         }
 
         /**
-         * 移除元素，{@code Bag} 中不需要实现
+         * 移除元素， Bag 中不需要实现
          */
-        public void remove() { }
+        public void remove() {
+        }
 
         /**
          * 获取下一个元素
+         *
          * @return {@code Item} 泛型类型的对象
          */
         public Item next() {

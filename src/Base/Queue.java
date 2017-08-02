@@ -6,10 +6,10 @@ import java.util.Iterator;
  * 使用链表实现的 Queue 队列
  * Queue 队列是一种基于 FIFO 策略的集合类型
  *
- * @param <Item> 泛型类型
  * @author igaozp
  * @version 1.0
  * @since 2017-6-30
+ * @param <Item> 泛型类型
  */
 public class Queue<Item> implements Iterable<Item> {
     /**
@@ -37,7 +37,7 @@ public class Queue<Item> implements Iterable<Item> {
      * 检查队列是否为空
      *
      * @return {@code true} 队列为空
-     * {@code false} 队列不为空
+     *         {@code false} 队列不为空
      */
     public boolean isEmpty() {
         return this.first == null;
