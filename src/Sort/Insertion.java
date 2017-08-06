@@ -14,6 +14,11 @@ import edu.princeton.cs.algs4.StdOut;
  * @version 1.0
  */
 public class Insertion {
+    /**
+     * 插入排序
+     *
+     * @param a 需要排序的数组
+     */
     public static void sort(Comparable[] a) {
         int N = a.length;
         // 遍历整个数组
@@ -51,7 +56,7 @@ public class Insertion {
     }
 
     /**
-     * 显示相应的数组元素
+     * 显示数组元素
      *
      * @param a 需要显示的数组
      */
