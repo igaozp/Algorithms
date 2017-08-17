@@ -53,7 +53,7 @@ public class DepthFirstPaths {
     }
 
     /**
-     * 检查指定顶点是否由相应的额路径
+     * 检查指定顶点是否由相应的路径
      *
      * @param v 指定的顶点
      * @return {@code true} 有路径
