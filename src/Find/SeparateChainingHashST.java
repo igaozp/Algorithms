@@ -65,7 +65,7 @@ public class SeparateChainingHashST<Key, Value> {
      * @return 键对应的值
      */
     public Value get(Key key) {
-        return (Value) st[hash(key)].get(key);
+        return st[hash(key)].get(key);
     }
 
     /**
