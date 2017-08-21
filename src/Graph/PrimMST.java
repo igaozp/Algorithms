@@ -31,7 +31,7 @@ public class PrimMST {
     /**
      * 构造方法
      *
-     * @param G 加权有向图
+     * @param G 加权无向图
      */
     public PrimMST(EdgeWeightedGraph G) {
         edgeTo = new Edge[G.V()];
@@ -50,9 +50,9 @@ public class PrimMST {
     }
 
     /**
-     * 访问加权有向图的顶点
+     * 访问加权无向图的顶点
      *
-     * @param G 加权有向图
+     * @param G 加权无向图
      * @param v 指定的顶点
      */
     private void visit(EdgeWeightedGraph G, int v) {
