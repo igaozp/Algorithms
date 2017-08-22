@@ -9,7 +9,7 @@ import edu.princeton.cs.algs4.EdgeWeightedDigraph;
  *
  * @author igaozp
  * @since 2017-07-19
- * @version 1.0
+ * @version 1.1
  */
 public class CPM {
     public static void main(String[] args) {
