@@ -57,8 +57,7 @@ public class RabinKarp {
      *
      * @return 素数
      */
-    private static long longRandomPrime()
-    {
+    private static long longRandomPrime() {
         BigInteger prime = BigInteger.probablePrime(31, new Random());
         return prime.longValue();
     }
