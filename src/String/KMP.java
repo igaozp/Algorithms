@@ -2,10 +2,28 @@ package String;
 
 import edu.princeton.cs.algs4.StdOut;
 
+/**
+ * KMP 字符串查找算法
+ *
+ * @author igaozp
+ * @since 2017-07-27
+ * @version 1.0
+ */
 public class KMP {
+    /**
+     * 匹配的字符串
+     */
     private String pat;
+    /**
+     * 有限状态自动机
+     */
     private int[][] dfa;
 
+    /**
+     * KMP 构造方法
+     *
+     * @param pat 想要查找的字符串
+     */
     public KMP(String pat) {
         this.pat = pat;
         int M = pat.length();
@@ -22,6 +40,12 @@ public class KMP {
         }
     }
 
+    /**
+     * KMP 查找
+     *
+     * @param txt 用作搜索的文本
+     * @return 查找到的字符串下标
+     */
     public int search(String txt) {
         int i, j, N = txt.length(), M = pat.length();
         for (i = 0, j = 0; i < N && j < M; i++) {
@@ -34,13 +58,20 @@ public class KMP {
         }
     }
 
+    /**
+     * 测试
+     *
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
         String pat = args[0];
         String txt = args[1];
         KMP kmp = new KMP(pat);
+
         StdOut.println("text:   " + txt);
         int offset = kmp.search(txt);
         StdOut.print("pattern: ");
+
         for (int i = 0; i < offset; i++) {
             StdOut.print(" ");
         }
