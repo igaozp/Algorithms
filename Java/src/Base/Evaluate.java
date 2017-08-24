@@ -9,7 +9,7 @@ import java.util.Stack;
  * 使用 Dijkstra 双栈算法求算术表达式
  *
  * @author igaozp
- * @version 1.0
+ * @version 1.1
  * @since 2017-6-30
  */
 public class Evaluate {
