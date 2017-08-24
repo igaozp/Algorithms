@@ -7,7 +7,7 @@ import java.util.Iterator;
  * Bag 是一种不支持删除其中元素的集合数据类型，可以用来收集和遍历元素
  *
  * @author igaozp
- * @version 1.0
+ * @version 1.1
  * @since 2017-6-30
  * @param <Item> 泛型类型
  */
