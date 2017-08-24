@@ -8,7 +8,7 @@ import java.util.Iterator;
  *
  * @author igaozp
  * @since 2017-6-30
- * @version 1.0
+ * @version 1.1
  * @param <Item>
  */
 public class Stack<Item> implements Iterable<Item> {
