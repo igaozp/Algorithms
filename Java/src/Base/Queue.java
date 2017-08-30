@@ -110,7 +110,7 @@ public class Queue<Item> implements Iterable<Item> {
          * 检查是否有下一个元素
          *
          * @return {@code true} 有下一个元素
-         * {@code false} 没有下一个元素
+         *         {@code false} 没有下一个元素
          */
         public boolean hasNext() {
             return current != null;
@@ -122,7 +122,7 @@ public class Queue<Item> implements Iterable<Item> {
         /**
          * 获取下一个元素
          *
-         * @return {@code Item} 泛型类型的对象
+         * @return Item 泛型类型的对象
          */
         public Item next() {
             Item item = current.item;
