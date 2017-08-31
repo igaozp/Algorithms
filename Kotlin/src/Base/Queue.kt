@@ -5,7 +5,7 @@ package Base
  * Queue 队列是一种基于 FIFO 策略的集合类型
  *
  * @author igaozp
- * @version 1.0
+ * @version 1.1
  * @since 2017-08-30
  * @param <Item> 泛型类型
  */
@@ -37,18 +37,14 @@ class Queue<Item>: Iterable<Item> {
      * @return `true` 队列为空
      *         `false` 队列不为空
      */
-    fun isEmpty(): Boolean {
-        return this.first == null
-    }
+    fun isEmpty(): Boolean = this.first == null
 
     /**
      * 检查队列的元素数量
      *
      * @return 元素数量
      */
-    fun size(): Int {
-        return N;
-    }
+    fun size(): Int = N
 
     /**
      * 向队列插入元素
