@@ -9,7 +9,7 @@ import java.util.Iterator;
  * @author igaozp
  * @since 2017-6-30
  * @version 1.1
- * @param <Item>
+ * @param <Item> 泛型类型
  */
 public class Stack<Item> implements Iterable<Item> {
     /**
