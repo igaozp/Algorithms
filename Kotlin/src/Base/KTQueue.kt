@@ -9,7 +9,7 @@ package Base
  * @since 2017-08-30
  * @param <Item> 泛型类型
  */
-class Queue<Item>: Iterable<Item> {
+class KTQueue<Item>: Iterable<Item> {
     /**
      * 队列的首节点
      */

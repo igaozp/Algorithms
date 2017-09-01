@@ -9,7 +9,7 @@ package Base
  * @since 2017-08-30
  * @param <Item> 泛型类型
  */
-class Bag<Item> : Iterable<Item> {
+class KTBag<Item> : Iterable<Item> {
     /**
      * 链表的首节点
      */

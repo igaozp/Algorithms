@@ -9,7 +9,7 @@ package Base
  * @version 1.0
  * @param <Item> 泛型类型
  */
-class Stack<Item> : Iterable<Item> {
+class KTStack<Item> : Iterable<Item> {
     /**
      * 栈的顶部节点
      */

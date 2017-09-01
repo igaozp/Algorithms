@@ -11,7 +11,7 @@ import java.util.Stack
  * @version 1.0
  * @since 2017-08-30
  */
-class Evalute {
+class KTEvalute {
     fun main(args: ArrayList<String>) {
         // 存放算术表达式的运算符
         val ops: Stack<String> = Stack()
