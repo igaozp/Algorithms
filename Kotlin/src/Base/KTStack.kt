@@ -77,9 +77,7 @@ class KTStack<Item> : Iterable<Item> {
      *
      * @return 迭代对象
      */
-    override fun iterator(): Iterator<Item> {
-        return ListIterator()
-    }
+    override fun iterator(): Iterator<Item> = ListIterator()
 
     /**
      * 自定义 ListIterator 用来实现 Iterable 接口
@@ -93,9 +91,7 @@ class KTStack<Item> : Iterable<Item> {
          * @return `true` 有下一个元素
          *         `false` 没有下一个元素
          */
-        override fun hasNext(): Boolean {
-            return current != null
-        }
+        override fun hasNext(): Boolean = current != null
 
         /**
          * 获取下一个元素
