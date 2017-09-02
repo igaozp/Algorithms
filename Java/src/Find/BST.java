@@ -386,7 +386,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     /**
      * 获取二叉树中所有的键
      *
-     * @return
+     * @return 所有键的集合
      */
     public Iterable<Key> keys() {
         return keys(min(), max());
@@ -399,7 +399,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @param hi 结束范围
      * @return 包含键的队列
      */
-    public Iterable<Key> keys(Key lo, Key hi) {
+    private Iterable<Key> keys(Key lo, Key hi) {
         Queue<Key> queue = new Queue<Key>();
         keys(root, queue, lo, hi);
         return queue;
