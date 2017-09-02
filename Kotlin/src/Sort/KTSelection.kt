@@ -11,7 +11,7 @@ import edu.princeton.cs.algs4.StdOut
  *
  * @author igaozp
  * @since 2017-09-01
- * @version 1.0
+ * @version 1.1
  */
 class KTSelection {
     /**
@@ -43,9 +43,7 @@ class KTSelection {
      * @return `true` 第一个参数比第二个小
      *         `false` 第一个参数比第二个大
      */
-    private fun less(v: Comparable<Any>, w: Comparable<Any>): Boolean {
-        return v < w
-    }
+    private fun less(v: Comparable<Any>, w: Comparable<Any>): Boolean = v < w
 
     /**
      * 交换元素

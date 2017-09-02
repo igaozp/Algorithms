@@ -7,7 +7,7 @@ package Sort
  *
  * @author igaozp
  * @since 2017-09-02
- * @version 1.0
+ * @version 1.1
  */
 class KTMergeBU {
     /**
@@ -78,7 +78,5 @@ class KTMergeBU {
      * @return `true` 第一个参数比第二个小
      *         `false` 第一个参数比第二个大
      */
-    fun less(v: Comparable<Any>, w: Comparable<Any>): Boolean {
-        return v < w
-    }
+    fun less(v: Comparable<Any>, w: Comparable<Any>): Boolean = v < w
 }

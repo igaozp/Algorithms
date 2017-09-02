@@ -11,7 +11,7 @@ import edu.princeton.cs.algs4.StdOut
  *
  * @author igaozp
  * @since 2017-08-31
- * @version 1.0
+ * @version 1.1
  */
 class KTInsertion {
     /**
@@ -40,9 +40,7 @@ class KTInsertion {
      * @return `true` 第一个参数比第二个小
      *         `false` 第一个参数比第二个大
      */
-    private fun less(v: Comparable<Any>, w: Comparable<Any>): Boolean {
-        return v.compareTo(w) < 0
-    }
+    private fun less(v: Comparable<Any>, w: Comparable<Any>): Boolean = v < w
 
     /**
      * 交换元素
@@ -63,9 +61,7 @@ class KTInsertion {
      * @param a 需要显示的数组
      */
     private fun show(a: Array<Comparable<Any>>) {
-        for (i in a) {
-            StdOut.print("$i ")
-        }
+        for (i in a) StdOut.print("$i ")
         StdOut.println()
     }
 
