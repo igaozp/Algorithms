@@ -8,7 +8,7 @@ package Sort
  *
  * @author igaozp
  * @since 2017-09-01
- * @version 1.1
+ * @version 1.2
  */
 class KTMerge {
     /**
@@ -63,12 +63,12 @@ class KTMerge {
         var j = mid + 1
 
         // 将 a[lo..hi] 复制到 aux[lo..hi]
-        for (k in lo..(hi + 1)) {
+        for (k in lo..hi) {
             aux!![k] = a[k]
         }
 
         // 归并回到 a[lo..hi]
-        for (k in lo..(hi + 1)) {
+        for (k in lo..hi) {
             when {
                 i > mid -> a[k] = aux!![j++]
                 j > hi -> a[k] = aux!![i++]

@@ -11,7 +11,7 @@ import edu.princeton.cs.algs4.StdOut
  *
  * @author igaozp
  * @since 2017-09-01
- * @version 1.1
+ * @version 1.2
  */
 class KTSelection {
     /**
@@ -21,7 +21,7 @@ class KTSelection {
      */
     fun sort(a: Array<Comparable<Any>>) {
         val N = a.size
-        for (i in 0..N) {
+        for (i in 0 until N) {
             var min = i
             // 寻找后半部分最小的元素下标
             val j = i + 1

@@ -11,7 +11,7 @@ import edu.princeton.cs.algs4.StdOut
  *
  * @author igaozp
  * @since 2017-09-01
- * @version 1.1
+ * @version 1.2
  */
 class KTShell {
     /**
@@ -33,7 +33,7 @@ class KTShell {
         // 通过不同的步长间隔对数组多次排序
         while (h >= 1) {
             // 以步长为间隔选择数组元素进行排序
-            (h..N).forEach { i ->
+            (h until N).forEach { i ->
                 val j = i
                 while (j >= h && less(a[j], a[j - h])) {
                     exch(a, j, j - h)

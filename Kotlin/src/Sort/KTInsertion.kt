@@ -22,7 +22,7 @@ class KTInsertion {
     fun sort(a: Array<Comparable<Any>>) {
         val N = a.size
         // 遍历整个数组
-        for (i in 1..N) {
+        for (i in 1 until N) {
             // 查找下标 i 之前的元素，如果小于下标 i 的元素则交换两个元素
             var j = i
             while (j > 0 && less(a[j], a[j - 1])) {
