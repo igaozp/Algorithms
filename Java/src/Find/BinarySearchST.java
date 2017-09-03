@@ -95,7 +95,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
                 // 查找的键大于中间键
                 lo = mid + 1;
             } else {
-                // 超找到相应的值
+                // 返回找到的相应的值
                 return mid;
             }
         }
