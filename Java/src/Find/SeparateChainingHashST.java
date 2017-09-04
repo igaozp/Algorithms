@@ -9,7 +9,7 @@ import Base.Queue;
  *
  * @author igaozp
  * @since 2017-07-10
- * @version 1.0
+ * @version 1.1
  *
  * @param <Key> 泛型类型
  * @param <Value> 泛型类型
@@ -76,6 +76,7 @@ public class SeparateChainingHashST<Key, Value> {
      */
     public void put(Key key, Value val) {
         st[hash(key)].put(key, val);
+        N++;
     }
 
     /**
