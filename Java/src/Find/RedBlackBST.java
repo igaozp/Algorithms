@@ -8,7 +8,7 @@ package Find;
  *
  * @author igaozp
  * @since 2017-07-07
- * @version 1.0
+ * @version 1.1
  *
  * @param <Key> 用作 key 的泛型类型
  * @param <Value> 用作 value 的泛型类型
