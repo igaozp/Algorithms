@@ -13,7 +13,7 @@ public class ConnectedComponent {
      */
     private boolean[] marked;
     /**
-     *
+     * 连通分量的标识符
      */
     private int[] id;
     /**
