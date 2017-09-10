@@ -81,7 +81,7 @@ public class KosarajuSCC {
     /**
      * 获取强连通分量的数量
      *
-     * @return
+     * @return 强连通分量的数量
      */
     public int count() {
         return count;
