@@ -1,7 +1,5 @@
 package String;
 
-import edu.princeton.cs.algs4.Insertion;
-
 /**
  * 高位优先的字符串排序
  *
@@ -59,7 +57,7 @@ public class MSD {
      */
     private static void sort(String[] a, int lo, int hi, int d) {
         if (hi <= lo + M) {
-            Insertion.sort(a, lo, hi, d);
+            insertion(a, lo, hi, d);
             return;
         }
 
@@ -82,5 +80,49 @@ public class MSD {
         for (int r = 0; r < R; r++) {
             sort(a, lo + count[r], lo + count[r + 1] - 1, d + 1);
         }
+    }
+
+    /**
+     * 插入排序
+     *
+     * @param a 需要排序的数组
+     * @param lo 起始位置
+     * @param hi 结束位置
+     * @param d 字符位置
+     */
+    private static void insertion(String[] a, int lo, int hi, int d) {
+        for (int i = lo; i <= hi; i++)
+            for (int j = i; j > lo && less(a[j], a[j-1], d); j--)
+                exch(a, j, j-1);
+    }
+
+    /**
+     * 交换两个字符串
+     *
+     * @param a 字符串数组
+     * @param i 交换的一个字符串下标
+     * @param j 交换的另一个字符串下标
+     */
+    private static void exch(String[] a, int i, int j) {
+        String temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
+    /**
+     * 比较两个字符串的大小
+     *
+     * @param v 一个字符串
+     * @param w 另一个字符串
+     * @param d 比较的起始字符位置
+     * @return {@code true} v < w
+     *         {@code false} v > w
+     */
+    private static boolean less(String v, String w, int d) {
+        for (int i = d; i < Math.min(v.length(), w.length()); i++) {
+            if (v.charAt(i) < w.charAt(i)) return true;
+            if (v.charAt(i) > w.charAt(i)) return false;
+        }
+        return v.length() < w.length();
     }
 }
