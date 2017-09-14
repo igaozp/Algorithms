@@ -8,7 +8,7 @@ import edu.princeton.cs.algs4.TST;
  * LZW 压缩
  *
  * @author igaozp
- * @since 1.0
+ * @since 2017-07-30
  * @version 1.0
  */
 public class LZW {
