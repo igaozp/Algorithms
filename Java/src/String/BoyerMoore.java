@@ -7,7 +7,7 @@ import edu.princeton.cs.algs4.StdOut;
  *
  * @author igaozp
  * @since 2017-07-27
- * @version 1.0
+ * @version 1.1
  */
 public class BoyerMoore {
     /**

@@ -9,7 +9,7 @@ import edu.princeton.cs.algs4.MinPQ;
  *
  * @author igaozp
  * @since 2017-07-29
- * @version 1.0
+ * @version 1.1
  */
 public class Huffman {
     /**
