@@ -4,13 +4,30 @@ import edu.princeton.cs.algs4.BinaryStdIn
 import edu.princeton.cs.algs4.BinaryStdOut
 import edu.princeton.cs.algs4.TST
 
+/**
+ * LZW 压缩
+ *
+ * @author igaozp
+ * @since 2017-09-14
+ * @version 1.0
+ */
 class KTLZW {
+    /**
+     * 输入的字符数
+     */
     private var R = 256
-
+    /**
+     * 编码总数
+     */
     private var L = 4096
-
+    /**
+     * 编码宽度
+     */
     private var  W = 12
 
+    /**
+     * 压缩
+     */
     fun compress() {
         var input = BinaryStdIn.readString()
         val st = TST<Int>()
@@ -36,6 +53,9 @@ class KTLZW {
         BinaryStdOut.close()
     }
 
+    /**
+     * 解码
+     */
     fun expand() {
         val st = arrayOfNulls<String>(L)
         var i = 0
