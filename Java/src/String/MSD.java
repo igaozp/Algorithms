@@ -26,7 +26,7 @@ public class MSD {
      *
      * @param s 字符串
      * @param d 指定的位置
-     * @return 字符
+     * @return 字符位置
      */
     private static int charAt(String s, int d) {
         if (d < s.length()) {
