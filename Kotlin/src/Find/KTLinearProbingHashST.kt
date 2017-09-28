@@ -22,26 +22,19 @@ class KTLinearProbingHashST<K, V>(cap: Int) {
     /**
      * 存放键的数组
      */
-    private var keys: Array<K?>? = null
+    private var keys: MutableList<K?>? = null
     /**
      * 存放值的数组
      */
-    private var vals: Array<V?>? = null
+    private var vals: MutableList<V?>? = null
 
     /**
      * 构造函数
      */
     init {
-        keys = Array(cap)
-        vals = Array(cap)
+        keys = MutableList(cap, { null })
+        vals = MutableList(cap, { null })
     }
-
-    /**
-     * 初始化数组的辅助函数
-     *
-     * @param cap 数组的大小
-     */
-    private fun <T> Array(cap: Int): Array<T> = Array(cap)
 
     /**
      * 哈希函数

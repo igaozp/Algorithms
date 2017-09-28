@@ -19,22 +19,17 @@ class KTSeparateChainingHashST<K, V>(private val M: Int) {
     /**
      * 存放链表对象的数组
      */
-    private var st: Array<SequentialSearchST<K, V>>? = null
+    private var st: MutableList<SequentialSearchST<K, V>>? = null
 
     /**
      * 构造函数
      */
     init {
-        st = Array(M)
+        st = MutableList(M, { null }) as MutableList<SequentialSearchST<K, V>>
         for (i in 0 until M) {
             st!![i] = SequentialSearchST()
         }
     }
-
-    /**
-     * 初始化数组的辅助函数
-     */
-    private fun Array(size: Int): Array<SequentialSearchST<K, V>> = Array(size)
 
     /**
      * 哈希函数，获取键值对中键的哈希值

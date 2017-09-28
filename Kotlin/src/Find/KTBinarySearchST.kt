@@ -16,11 +16,11 @@ class KTBinarySearchST<K: Comparable<K>, V>(capacity: Int) {
     /**
      * 存储键的数组
      */
-    private var keys: Array<K>? = null
+    private var keys: MutableList<K?>? = null
     /**
      * 存储值的数组
      */
-    private var vals: Array<V>? = null
+    private var vals: MutableList<V?>? = null
     /**
      * 查找表的长度
      */
@@ -30,14 +30,9 @@ class KTBinarySearchST<K: Comparable<K>, V>(capacity: Int) {
      * 构造函数
      */
     init {
-        this.keys = Array(capacity)
-        this.vals = Array(capacity)
+        this.keys = MutableList(capacity, { null })
+        this.vals = MutableList(capacity, { null })
     }
-
-    /**
-     * 初始化数组的辅助函数
-     */
-    private fun <T> Array(capacity: Int): Array<T> = Array(capacity)
 
     /**
      * 检查查找表的长度
@@ -65,7 +60,7 @@ class KTBinarySearchST<K: Comparable<K>, V>(capacity: Int) {
         // 查找到的键的坐标
         val i = rank(key)
         return when {
-            i < N && keys!![i].compareTo(key) == 0 -> vals!![i]
+            i < N && keys?.get(i)!!.compareTo(key) == 0 -> vals!![i]
             else -> null
         }
     }
@@ -81,7 +76,7 @@ class KTBinarySearchST<K: Comparable<K>, V>(capacity: Int) {
         var hi = N - 1
         while (lo <= hi) {
             val mid = lo + (hi - lo) / 2
-            val cmp = key.compareTo(keys!![mid])
+            val cmp = key.compareTo(keys?.get(mid)!!)
             when {
                 // 查找的键小于中间键
                 cmp < 0 -> hi = mid - 1
@@ -102,7 +97,7 @@ class KTBinarySearchST<K: Comparable<K>, V>(capacity: Int) {
      */
     fun put(key: K, value: V) {
         val i = rank(key)
-        if (i < N && keys!![i].compareTo(key) == 0) {
+        if (i < N && keys?.get(i)!!.compareTo(key) == 0) {
             vals!![i] = value
             return
         }
@@ -134,14 +129,14 @@ class KTBinarySearchST<K: Comparable<K>, V>(capacity: Int) {
      *
      * @return 最小值的键
      */
-    fun min(): K = keys!![0]
+    fun min(): K = keys?.get(0)!!
 
     /**
      * 获取最小值的键
      *
      * @return 最小值的键
      */
-    fun max(): K = keys!![N - 1]
+    fun max(): K = keys?.get(N - 1)!!
 
     /**
      * 获取相应的键
@@ -149,7 +144,7 @@ class KTBinarySearchST<K: Comparable<K>, V>(capacity: Int) {
      * @param k 键的下标
      * @return 查找到的键
      */
-    fun select(k: Int): K = keys!![k]
+    fun select(k: Int): K = keys?.get(k)!!
 
     /**
      * 查找不大于该键的键
@@ -157,7 +152,7 @@ class KTBinarySearchST<K: Comparable<K>, V>(capacity: Int) {
      * @param key 查找的键
      * @return 查找到的键
      */
-    fun ceiling(key: K): K = keys!![rank(key)]
+    fun ceiling(key: K): K = keys?.get(rank(key))!!
 
     /**
      * 查找不小于该键的键
@@ -165,7 +160,7 @@ class KTBinarySearchST<K: Comparable<K>, V>(capacity: Int) {
      * @param key 查找的键
      * @return 查找到的键
      */
-    fun floor(key: K): K = keys!![rank(key)]
+    fun floor(key: K): K = keys?.get(rank(key))!!
 
     /**
      * 表中所有键的集合
