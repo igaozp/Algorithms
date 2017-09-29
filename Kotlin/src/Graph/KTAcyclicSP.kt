@@ -16,11 +16,11 @@ class KTAcyclicSP {
     /**
      * 路径的边
      */
-    private var edgeTo: Array<DirectedEdge>? = null
+    private var edgeTo: MutableList<DirectedEdge?>? = null
     /**
      * 路径长度
      */
-    private var distTo: Array<Double>? = null
+    private var distTo: MutableList<Double?>? = null
 
     /**
      * 构造方法
@@ -29,8 +29,8 @@ class KTAcyclicSP {
      * @param s 起始顶点
      */
     constructor(G: EdgeWeightedDigraph, s: Int) {
-        this.edgeTo = Array(G.V()) as Array<DirectedEdge>
-        this.distTo = Array(G.V()) as Array<Double>
+        this.edgeTo = MutableList(G.V(), { null })
+        this.distTo = MutableList(G.V(), { null })
         for (v in 0 until G.V()) {
             distTo!![v] = Double.POSITIVE_INFINITY
         }
@@ -56,8 +56,8 @@ class KTAcyclicSP {
     private fun relax(G: EdgeWeightedDigraph, v: Int) {
         for (e in G.adj(v)) {
             val w = e.to()
-            if (distTo!![w] > distTo!![v] + e.weight()) {
-                distTo!![w] = distTo!![v] + e.weight()
+            if (distTo?.get(w)!! > distTo?.get(v)!! + e.weight()) {
+                distTo!![w] = distTo?.get(v)!! + e.weight()
                 edgeTo!![w] = e
             }
         }
@@ -69,7 +69,7 @@ class KTAcyclicSP {
      * @param v 指定的顶点
      * @return 路径长度
      */
-    fun distTo(v: Int): Double = distTo!![v]
+    fun distTo(v: Int): Double = distTo?.get(v)!!
 
     /**
      * 检查到指定顶点是否有路径
@@ -78,7 +78,7 @@ class KTAcyclicSP {
      * @return `true` 有路径
      *         `false` 没有路径
      */
-    fun hasPathTo(v: Int): Boolean = distTo!![v] < Double.POSITIVE_INFINITY
+    fun hasPathTo(v: Int): Boolean = distTo?.get(v)!! < Double.POSITIVE_INFINITY
 
     /**
      * 获取到指定顶点的路径

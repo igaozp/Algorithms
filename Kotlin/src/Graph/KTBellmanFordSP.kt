@@ -15,15 +15,15 @@ class KTBellmanFordSP(G: EdgeWeightedDigraph, s: Int) {
     /**
      * 到某个顶点的路径长度
      */
-    private var distTo: Array<Double>? = null
+    private  var distTo: MutableList<Double?>? = null
     /**
      * 到某个顶点的最后一条边
      */
-    private var edgeTo: Array<DirectedEdge>? = null
+    private var edgeTo: MutableList<DirectedEdge?>? = null
     /**
      * 该顶点是否在队列中
      */
-    private var onQ: Array<Boolean>? = null
+    private var onQ: MutableList<Boolean?>? = null
     /**
      * 正在被放松的顶点
      */
@@ -41,9 +41,9 @@ class KTBellmanFordSP(G: EdgeWeightedDigraph, s: Int) {
      * 构造函数
      */
     init {
-        distTo = Array(G.V()) as Array<Double>
-        edgeTo = Array(G.V()) as Array<DirectedEdge>
-        onQ = Array(G.V()) as Array<Boolean>
+        distTo = MutableList(G.V(), { null })
+        edgeTo = MutableList(G.V(), { null })
+        onQ = MutableList(G.V(), { null })
         queue = Queue()
         for (v in 0 until G.V()) {
             distTo!![v] = Double.POSITIVE_INFINITY
@@ -59,11 +59,6 @@ class KTBellmanFordSP(G: EdgeWeightedDigraph, s: Int) {
     }
 
     /**
-     * 生成函数的辅助函数
-     */
-    private fun Array(size: Int): Array<Any>  = Array(size)
-
-    /**
      * 顶点的松弛
      *
      * @param G 加权有向图
@@ -72,10 +67,10 @@ class KTBellmanFordSP(G: EdgeWeightedDigraph, s: Int) {
     private fun relax(G: EdgeWeightedDigraph, v: Int) {
         for (e in G.adj(v)) {
             val w = e.to()
-            if (distTo!![w] > distTo!![v] + e.weight()) {
-                distTo!![w] = distTo!![v] + e.weight()
+            if (distTo?.get(w)!! > distTo?.get(v)!! + e.weight()) {
+                distTo!![w] = distTo?.get(v)!! + e.weight()
                 edgeTo!![w] = e
-                if (!onQ!![w]) {
+                if (!onQ?.get(w)!!) {
                     queue!!.enqueue(w)
                     onQ!![w] = true
                 }
@@ -92,7 +87,7 @@ class KTBellmanFordSP(G: EdgeWeightedDigraph, s: Int) {
      * @param v 指定的顶点
      * @return 路径长度
      */
-    fun distTo(v: Int): Double = distTo!![v]
+    fun distTo(v: Int): Double = distTo?.get(v)!!
 
     /**
      * 检查到指定顶点是否有路径
@@ -101,7 +96,7 @@ class KTBellmanFordSP(G: EdgeWeightedDigraph, s: Int) {
      * @return `true` 有路径
      *         `false` 没有路径
      */
-    fun hasPathTo(v: Int): Boolean = distTo!![v] < Double.POSITIVE_INFINITY
+    fun hasPathTo(v: Int): Boolean = distTo?.get(v)!! < Double.POSITIVE_INFINITY
 
     /**
      * 获取到指定顶点的路径
