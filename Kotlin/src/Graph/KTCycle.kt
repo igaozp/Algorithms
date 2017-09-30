@@ -11,7 +11,7 @@ class KTCycle(G: Graph) {
     /**
      * 存储每个顶点的访问情况
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 是否有环
      */
@@ -21,16 +21,11 @@ class KTCycle(G: Graph) {
      * 构造方法
      */
     init {
-        marked = Array(G.V())
+        marked = MutableList(G.V(), { null })
         (0 until G.V())
-                .filterNot { marked!![it] }
+                .filterNot { marked?.get(it)!! }
                 .forEach { dfs(G, it, it) }
     }
-
-    /**
-     * 初始化数组用的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 深度优先搜索
@@ -42,7 +37,7 @@ class KTCycle(G: Graph) {
     private fun dfs(G: Graph, v: Int, u: Int) {
         marked!![v] = true
         for (w in G.adj(v)) {
-            if (!marked!![w]) {
+            if (!marked?.get(w)!!) {
                 dfs(G, w, v)
             } else if (w != u) {
                 hasCycle = true

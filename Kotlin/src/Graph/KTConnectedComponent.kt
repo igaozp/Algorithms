@@ -11,11 +11,11 @@ class KTConnectedComponent(G: Graph) {
     /**
      * 存储图中顶点的访问状态
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 连通分量的标识符
      */
-    private var id: Array<Int>? = null
+    private var id: MutableList<Int?>? = null
     /**
      * 顶点的访问次数
      */
@@ -25,21 +25,16 @@ class KTConnectedComponent(G: Graph) {
      * 构造方法
      */
     init {
-        marked = Array(G.V())
-        id = Array(G.V())
+        marked = MutableList(G.V(), { null })
+        id = MutableList(G.V(), { null })
 
         for (s in 0 until G.V()) {
-            if (!marked!![s]) {
+            if (!marked?.get(s)!!) {
                 dfs(G, s)
                 count++
             }
         }
     }
-
-    /**
-     * 生成函数的辅助数组
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 深度优先搜索
@@ -53,7 +48,7 @@ class KTConnectedComponent(G: Graph) {
 
         // 访问与 v 连通的顶点
         G.adj(v)
-                .filterNot { marked!![it] }
+                .filterNot { marked?.get(it)!! }
                 .forEach { dfs(G, it) }
     }
 
@@ -73,7 +68,7 @@ class KTConnectedComponent(G: Graph) {
      * @param v 指定的顶点
      * @return 标识符
      */
-    fun id(v: Int): Int = id!![v]
+    fun id(v: Int): Int = id?.get(v)!!
 
     /**
      * 图的访问次数
