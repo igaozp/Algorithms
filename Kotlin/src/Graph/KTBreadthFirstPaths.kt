@@ -15,25 +15,20 @@ class KTBreadthFirstPaths(G: Graph, private var s: Int) {
     /**
      * 标记图中顶点的访问情况
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 一棵由父链接标识的树，从起点到一个顶点的已知路径上的最后一个顶点
      */
-    private var edgeTo: Array<Int>? = null
+    private var edgeTo: MutableList<Int?>? = null
 
     /**
      * 构造函数
      */
     init {
-        marked = Array(G.V())
-        edgeTo = Array(G.V())
+        marked = MutableList(G.V(), { null })
+        edgeTo = MutableList(G.V(), { null })
         bfs(G, s)
     }
-
-    /**
-     * 初始化数组的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 广度优先搜索
@@ -48,7 +43,7 @@ class KTBreadthFirstPaths(G: Graph, private var s: Int) {
         while (!queue.isEmpty) {
             val v = queue.dequeue()
             for (w in G.adj(v)) {
-                if (!marked!![w]) {
+                if (!marked?.get(w)!!) {
                     edgeTo!![w] = v
                     marked!![w] = true
                     queue.enqueue(w)
@@ -64,7 +59,7 @@ class KTBreadthFirstPaths(G: Graph, private var s: Int) {
      * @return `true` 有路径
      *         `false` 没有路径
      */
-    fun hasPathTo(v: Int) = marked!![v]
+    fun hasPathTo(v: Int): Boolean = marked?.get(v)!!
 
     /**
      * 到指定顶点的路径
@@ -78,7 +73,7 @@ class KTBreadthFirstPaths(G: Graph, private var s: Int) {
         var x = v
         while (x != s) {
             path.push(x)
-            x = edgeTo!![x]
+            x = edgeTo?.get(x)!!
         }
         path.push(s)
         return path

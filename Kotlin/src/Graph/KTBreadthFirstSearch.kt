@@ -13,7 +13,7 @@ class KTBreadthFirstSearch(G: Graph, s: Int) {
     /**
      * 存储图顶点的访问情况
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 存储顶点的访问次数
      */
@@ -23,14 +23,9 @@ class KTBreadthFirstSearch(G: Graph, s: Int) {
      * 构造方法
      */
     init {
-        marked = Array(G.V())
+        marked = MutableList(G.V(), { null })
         bfs(G, s)
     }
-
-    /**
-     * 生成函数的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 广度优先搜索
@@ -49,7 +44,7 @@ class KTBreadthFirstSearch(G: Graph, s: Int) {
             val v = queue.dequeue()
             for (w in G.adj(v)) {
                 // 没有访问则入队
-                if (!marked!![w]) {
+                if (!marked?.get(w)!!) {
                     marked!![w] = true
                     queue.enqueue(w)
                 }
@@ -64,7 +59,7 @@ class KTBreadthFirstSearch(G: Graph, s: Int) {
      * @return `true` 访问过
      *         `false` 未访问过
      */
-    fun marked(w: Int): Boolean = marked!![w]
+    fun marked(w: Int): Boolean = marked?.get(w)!!
 
     /**
      * 获取图的访问次数
