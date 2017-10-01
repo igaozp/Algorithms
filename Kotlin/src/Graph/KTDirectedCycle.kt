@@ -14,11 +14,11 @@ class KTDirectedCycle(G: Digraph) {
     /**
      * 图中每个节点的访问情况
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 存储边的信息
      */
-    private var edgeTo: Array<Int>? = null
+    private var edgeTo: MutableList<Int?>? = null
     /**
      * 存储环中的顶点
      */
@@ -26,24 +26,19 @@ class KTDirectedCycle(G: Digraph) {
     /**
      * 存储递归调用的栈上的所有顶点
      */
-    private var onStack: Array<Boolean>? = null
+    private var onStack: MutableList<Boolean?>? = null
 
     /**
      * 构造方法
      */
     init {
-        onStack = Array(G.V())
-        edgeTo = Array(G.V())
-        marked = Array(G.V())
+        onStack = MutableList(G.V(), { null })
+        edgeTo = MutableList(G.V(), { null })
+        marked = MutableList(G.V(), { null })
         (0 until G.V())
-                .filterNot { marked!![it] }
+                .filterNot { marked?.get(it)!! }
                 .forEach { dfs(G, it) }
     }
-
-    /**
-     * 生成数组的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 深度优先搜索
@@ -58,15 +53,15 @@ class KTDirectedCycle(G: Digraph) {
         for (w in G.adj(v)) {
             if (this.hasCycle()) {
                 return
-            } else if (!marked!![w]) {
+            } else if (!marked?.get(w)!!) {
                 edgeTo!![w] = v
                 dfs(G, w)
-            } else if (onStack!![w]) {
+            } else if (onStack?.get(w)!!) {
                 cycle = Stack()
                 var x = v
                 while (x != w) {
                     cycle!!.push(x)
-                    x = edgeTo!![x]
+                    x = edgeTo?.get(x)!!
                 }
                 cycle!!.push(w)
                 cycle!!.push(v)

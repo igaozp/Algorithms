@@ -17,23 +17,18 @@ class KTDigraph(private var V: Int) {
     /**
      * 邻接表
      */
-    private var adj: Array<Bag<Int>>? = null
+    private var adj: MutableList<Bag<Int>?>? = null
 
     /**
      * 构造方法
      */
     init {
         this.E = 0
-        adj = Array(V)
+        adj = MutableList(V, { null })
         for (v in 0 until V) {
             adj!![v] = Bag()
         }
     }
-
-    /**
-     * 生成函数的辅助方法
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 获取有向图的顶点数量
@@ -56,7 +51,7 @@ class KTDigraph(private var V: Int) {
      * @param w 边的结束顶点
      */
     fun addEdge(v: Int, w: Int) {
-        adj!![v].add(w)
+        adj?.get(v)!!.add(w)
         E++
     }
 
@@ -66,7 +61,7 @@ class KTDigraph(private var V: Int) {
      * @param v 指定的顶点
      * @return 顶点的集合
      */
-    fun adj(v: Int): Iterable<Int> = adj!![v]
+    fun adj(v: Int): Iterable<Int> = adj?.get(v)!!
 
     /**
      * 有向图的反转

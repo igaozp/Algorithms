@@ -15,7 +15,7 @@ class KTDepthFirstOrder(G: Digraph) {
     /**
      * 存储顶点的访问 状态
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 顶点的先序排列
      */
@@ -36,17 +36,12 @@ class KTDepthFirstOrder(G: Digraph) {
         pre = Queue()
         post = Queue()
         reversePost = Stack()
-        marked = Array(G.V())
+        marked = MutableList(G.V(), { null })
 
         (0 until G.V())
-                .filterNot { marked!![it] }
+                .filterNot { marked?.get(it)!! }
                 .forEach { dfs(G, it) }
     }
-
-    /**
-     * 初始化数组的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 深度优先搜索
@@ -59,7 +54,7 @@ class KTDepthFirstOrder(G: Digraph) {
         marked!![v] = true
 
         G.adj(v)
-                .filterNot { marked!![it] }
+                .filterNot { marked?.get(it)!! }
                 .forEach { dfs(G, it) }
 
         post!!.enqueue(v)

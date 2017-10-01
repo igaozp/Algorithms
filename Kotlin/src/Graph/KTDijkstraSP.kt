@@ -16,11 +16,11 @@ class KTDijkstraSP(G: EdgeWeightedDigraph, s: Int) {
     /**
      * 距离路径最近的边
      */
-    private var edgeTo: Array<DirectedEdge>? = null
+    private var edgeTo: MutableList<DirectedEdge?>? = null
     /**
      * 边的权重
      */
-    private var distTo: Array<Double>? = null
+    private var distTo: MutableList<Double?>? = null
     /**
      * 有效的横切边
      */
@@ -30,8 +30,8 @@ class KTDijkstraSP(G: EdgeWeightedDigraph, s: Int) {
      * 构造方法
      */
     init {
-        edgeTo = Array(G.V())
-        distTo = Array(G.V())
+        edgeTo = MutableList(G.V(), { null })
+        distTo = MutableList(G.V(), { null })
         pq = IndexMinPQ(G.V())
         for (v in 0 until G.V()) {
             distTo!![v] = Double.POSITIVE_INFINITY
@@ -45,11 +45,6 @@ class KTDijkstraSP(G: EdgeWeightedDigraph, s: Int) {
     }
 
     /**
-     * 初始化数组的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
-
-    /**
      * 顶点的松弛
      *
      * @param G 加权有向图
@@ -58,8 +53,8 @@ class KTDijkstraSP(G: EdgeWeightedDigraph, s: Int) {
     private fun relax(G: EdgeWeightedDigraph, v: Int) {
         for (e in G.adj(v)) {
             val w = e.to()
-            if (distTo!![w] > distTo!![v] + e.weight()) {
-                distTo!![w] = distTo!![v] + e.weight()
+            if (distTo?.get(w)!! > distTo?.get(v)!! + e.weight()) {
+                distTo!![w] = distTo?.get(v)!! + e.weight()
                 edgeTo!![w] = e
                 if (pq!!.contains(w)) {
                     pq!!.change(w, distTo!![w])
@@ -76,7 +71,7 @@ class KTDijkstraSP(G: EdgeWeightedDigraph, s: Int) {
      * @param v 指定的顶点
      * @return 距离
      */
-    fun distTo(v: Int): Double = distTo!![v]
+    fun distTo(v: Int): Double = distTo?.get(v)!!
 
     /**
      * 检查到指定的顶点是否由路径
@@ -85,7 +80,7 @@ class KTDijkstraSP(G: EdgeWeightedDigraph, s: Int) {
      * @return `true` 有路径
      *         `false` 没有路径
      */
-    fun hasPathTo(v: Int): Boolean = distTo!![v] < Double.POSITIVE_INFINITY
+    fun hasPathTo(v: Int): Boolean = distTo?.get(v)!! < Double.POSITIVE_INFINITY
 
     /**
      * 到指定顶点的路径

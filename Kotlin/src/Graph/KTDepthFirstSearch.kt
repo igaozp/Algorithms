@@ -11,7 +11,7 @@ class KTDepthFirstSearch(G: Graph, s: Int) {
     /**
      * 存储图的每个顶点的访问情况
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 访问的次数
      */
@@ -21,14 +21,9 @@ class KTDepthFirstSearch(G: Graph, s: Int) {
      * 构造方法
      */
     init {
-        marked = Array(G.V())
+        marked = MutableList(G.V(), { null })
         dfs(G, s)
     }
-
-    /**
-     * 生成数组的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 深度优先搜索
@@ -40,7 +35,7 @@ class KTDepthFirstSearch(G: Graph, s: Int) {
         marked!![v] = true
         count++
         G.adj(v)
-                .filterNot { marked!![it] }
+                .filterNot { marked?.get(it)!! }
                 .forEach { dfs(G, it) }
     }
 
@@ -51,7 +46,7 @@ class KTDepthFirstSearch(G: Graph, s: Int) {
      * @return `true` 访问过
      *         `false` 未访问过
      */
-    fun marked(w: Int): Boolean = marked!![w]
+    fun marked(w: Int): Boolean = marked?.get(w)!!
 
     /**
      * 获取顶点的访问次数
