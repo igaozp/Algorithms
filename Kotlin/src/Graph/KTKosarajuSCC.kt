@@ -14,11 +14,11 @@ class KTKosarajuSCC {
     /**
      * 存储顶点的访问情况
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 强连通分量的标识符
      */
-    private var id: Array<Int>? = null
+    private var id: MutableList<Int?>? = null
     /**
      * 强连通分量的数量
      */
@@ -30,22 +30,17 @@ class KTKosarajuSCC {
      * @param G 有向图
      */
     constructor(G: Digraph) {
-        marked = Array(G.V())
-        id = Array(G.V())
+        marked = MutableList(G.V(), { null })
+        id = MutableList(G.V(), { null })
         val order = DepthFirstOrder(G.reverse())
 
         for (s in order.reversePost()) {
-            if (!marked!![s]) {
+            if (!marked?.get(s)!!) {
                 dfs(G, s)
                 count++
             }
         }
     }
-
-    /**
-     * 生成数组的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 深度优先搜索
@@ -58,7 +53,7 @@ class KTKosarajuSCC {
         id!![v] = count
 
         G.adj(v).forEach { w ->
-            if (!marked!![w]) {
+            if (!marked?.get(w)!!) {
                 dfs(G, w)
             }
         }
@@ -80,7 +75,7 @@ class KTKosarajuSCC {
      * @param v 指定的顶点
      * @return 标识符
      */
-    fun id(v: Int): Int = id!![v]
+    fun id(v: Int): Int = id?.get(v)!!
 
     /**
      * 获取强连通分量的数量

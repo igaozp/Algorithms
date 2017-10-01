@@ -16,11 +16,11 @@ class KTTwoColor(G: Graph) {
     /**
      * 存储顶点的访问情况
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 存储顶点的颜色状态
      */
-    private var color: Array<Boolean>? = null
+    private var color: MutableList<Boolean?>? = null
     /**
      * 是否是二分图
      */
@@ -30,20 +30,15 @@ class KTTwoColor(G: Graph) {
      * 构造方法
      */
     init {
-        marked = Array(G.V())
-        color = Array(G.V())
+        marked = MutableList(G.V(), { null })
+        color = MutableList(G.V(), { null })
 
         (0 until G.V()).forEach { s ->
-            if (!marked!![s]) {
+            if (!marked?.get(s)!!) {
                 dfs(G, s)
             }
         }
     }
-
-    /**
-     * 生成数组的辅助方法
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 深度优先搜索
@@ -55,8 +50,8 @@ class KTTwoColor(G: Graph) {
         marked!![v] = true
 
         for (w in G.adj(v)) {
-            if (!marked!![w]) {
-                color!![w] = !color!![v]
+            if (!marked?.get(w)!!) {
+                color!![w] = !color?.get(v)!!
                 dfs(G, w)
             } else if (color!![w] == color!![v]) {
                 isTwoColorable = false

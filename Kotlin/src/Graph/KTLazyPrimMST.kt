@@ -16,7 +16,7 @@ class KTLazyPrimMST {
     /**
      * 最小生成树的顶点
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 最小生成树的边
      */
@@ -33,7 +33,7 @@ class KTLazyPrimMST {
      */
     constructor(G: EdgeWeightedGraph) {
         pq = MinPQ()
-        marked = Array(G.V())
+        marked = MutableList(G.V(), { null })
         mst = Queue()
 
         visit(G, 0)
@@ -43,25 +43,20 @@ class KTLazyPrimMST {
             val v = e.either()
             val w = e.other(v)
 
-            if (marked!![v] && marked!![w]) {
+            if (marked?.get(v)!! && marked?.get(w)!!) {
                 continue
             }
 
             mst!!.enqueue(e)
 
-            if (!marked!![v]) {
+            if (!marked?.get(v)!!) {
                 visit(G, v)
             }
-            if (!marked!![w]) {
+            if (!marked?.get(w)!!) {
                 visit(G, w)
             }
         }
     }
-
-    /**
-     * 生成数组的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T>  = Array(size)
 
     /**
      * 访问加权无向图的顶点
@@ -72,7 +67,7 @@ class KTLazyPrimMST {
     private fun visit(G: EdgeWeightedGraph, v: Int) {
         marked!![v] = true
         G.adj(v)
-                .filterNot { marked!![it.other(v)] }
+                .filterNot { marked?.get(it.other(v))!! }
                 .forEach { pq!!.insert(it) }
     }
 

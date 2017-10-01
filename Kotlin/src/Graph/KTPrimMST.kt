@@ -16,15 +16,15 @@ class KTPrimMST(G: EdgeWeightedGraph) {
     /**
      * 距离树最近的边
      */
-    private var edgeTo: Array<Edge>? = null
+    private var edgeTo: MutableList<Edge?>? = null
     /**
      * 存储边的权重
      */
-    private var distTo: Array<Double>? = null
+    private var distTo: MutableList<Double?>? = null
     /**
      * 顶点的访问情况
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
     /**
      * 有效的横切边
      */
@@ -36,9 +36,9 @@ class KTPrimMST(G: EdgeWeightedGraph) {
      * @param G 加权无向图
      */
     init {
-        edgeTo = Array(G.V())
-        distTo = Array(G.V())
-        marked = Array(G.V())
+        edgeTo = MutableList(G.V(), { null })
+        distTo = MutableList(G.V(), { null })
+        marked = MutableList(G.V(), { null })
         for (v in 0 until G.V()) {
             distTo!![v] = Double.POSITIVE_INFINITY
         }
@@ -52,11 +52,6 @@ class KTPrimMST(G: EdgeWeightedGraph) {
     }
 
     /**
-     * 初始化数组的辅助方法
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
-
-    /**
      * 访问加权无向图的顶点
      *
      * @param G 加权无向图
@@ -67,10 +62,10 @@ class KTPrimMST(G: EdgeWeightedGraph) {
         for (e in G.adj(v)) {
             val w = e.other(v)
 
-            if (marked!![w]) {
+            if (marked?.get(w)!!) {
                 continue
             }
-            if (e.weight() < distTo!![w]) {
+            if (e.weight() < distTo?.get(w)!!) {
                 edgeTo!![w] = e
                 distTo!![w] = e.weight()
 

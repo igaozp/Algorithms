@@ -19,7 +19,7 @@ class KTSymbolGraph(stream: String, sp: String) {
     /**
      * 反向索引
      */
-    private var keys: Array<String>? = null
+    private var keys: MutableList<String?>? = null
     /**
      * 无向图
      */
@@ -43,7 +43,7 @@ class KTSymbolGraph(stream: String, sp: String) {
         }
 
         // 构建反向索引
-        keys = Array(st!!.size())
+        keys = MutableList(st!!.size(), { null })
         for (name in st!!.keys()) {
             keys!![st!!.get(name)] = name
         }
@@ -59,11 +59,6 @@ class KTSymbolGraph(stream: String, sp: String) {
             }
         }
     }
-
-    /**
-     * 生成数组的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 检查图中是否包含某个字符串
@@ -92,7 +87,7 @@ class KTSymbolGraph(stream: String, sp: String) {
      * @param v 指定的索引
      * @return 字符串
      */
-    fun name(v: Int): String = keys!![v]
+    fun name(v: Int): String = keys?.get(v)!!
 
     /**
      * 获取符号图
