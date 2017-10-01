@@ -27,7 +27,7 @@ class KTGraph {
     /**
      * 邻接表
      */
-    private var adj: Array<Bag<Int>>? = null
+    private var adj: MutableList<Bag<Int>?>? = null
 
     /**
      * 构造函数
@@ -37,7 +37,7 @@ class KTGraph {
     constructor(V: Int) {
         this.V = V
         this.E = E
-        adj = Array(V)
+        adj = MutableList(V, { null })
         for (v in 0 until V) {
             adj!![v] = Bag()
         }
@@ -56,11 +56,6 @@ class KTGraph {
             adj!![v] = Bag()
         }
     }
-
-    /**
-     * 初始化数组的辅助函数
-     */
-    private fun Array(size: Int): Array<Bag<Int>> = Array(size)
 
     /**
      * 获取无向图的顶点数量
@@ -83,8 +78,8 @@ class KTGraph {
      * @param w 边的结束顶点
      */
     fun addEdge(v: Int, w: Int) {
-        adj!![v].add(w)
-        adj!![w].add(v)
+        adj?.get(v)!!.add(w)
+        adj?.get(w)!!.add(v)
         E++
     }
 
@@ -94,7 +89,7 @@ class KTGraph {
      * @param v 指定的顶点
      * @return 包含相连顶点的集合
      */
-    fun adj(v: Int): Iterable<Int> = adj!![v]
+    fun adj(v: Int): Iterable<Int> = adj?.get(v)!!
 
     /**
      * 在指定的图中获取某个顶点的度数

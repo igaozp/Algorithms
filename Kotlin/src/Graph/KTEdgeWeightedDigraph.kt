@@ -23,7 +23,7 @@ class KTEdgeWeightedDigraph {
     /**
      * 邻接表
      */
-    private var adj: Array<Bag<DirectedEdge>>? = null
+    private var adj: MutableList<Bag<DirectedEdge>?>? = null
 
     /**
      * 构造方法
@@ -33,7 +33,7 @@ class KTEdgeWeightedDigraph {
     constructor(V: Int) {
         this.V = V
         this.E = 0
-        adj = Array(V)
+        adj = MutableList(V, { null })
         for (v in 0 until V) {
             adj!![v] = Bag()
         }
@@ -52,8 +52,6 @@ class KTEdgeWeightedDigraph {
             adj!![v] = Bag()
         }
     }
-
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 获取顶点的数量
@@ -75,7 +73,7 @@ class KTEdgeWeightedDigraph {
      * @param e 带权重的边
      */
     fun addEdge(e: DirectedEdge) {
-        adj!![e.from()].add(e)
+        adj?.get(e.from())!!.add(e)
         E++
     }
 
@@ -85,7 +83,7 @@ class KTEdgeWeightedDigraph {
      * @param v 指定的顶点
      * @return 边的集合
      */
-    fun adj(v: Int): Iterable<DirectedEdge> = adj!![v]
+    fun adj(v: Int): Iterable<DirectedEdge> = adj?.get(v)!!
 
     /**
      * 获取有向图所有的边
@@ -95,7 +93,7 @@ class KTEdgeWeightedDigraph {
     fun edges(): Iterable<DirectedEdge> {
         val bag = Bag<DirectedEdge>()
         (0 until V).forEach { v ->
-            adj!![v].forEach { e -> bag.add(e) }
+            adj?.get(v)!!.forEach { e -> bag.add(e) }
         }
         return bag
     }

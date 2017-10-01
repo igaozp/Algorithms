@@ -23,7 +23,7 @@ class KTEdgeWeightedGraph {
     /**
      * 邻接表
      */
-    private var adj: Array<Bag<Edge>>? = null
+    private var adj: MutableList<Bag<Edge>?>? = null
 
     /**
      * 构造方法
@@ -33,7 +33,7 @@ class KTEdgeWeightedGraph {
     constructor(V: Int) {
         this.V = V
         this.E = 0
-        adj = Array(V)
+        adj = MutableList(V, { null })
 
         for (v in 0 until V) {
             adj!![v] = Bag()
@@ -54,11 +54,6 @@ class KTEdgeWeightedGraph {
             adj!![v] = Bag()
         }
     }
-
-    /**
-     * 生成函数的辅助方法
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 获取顶点的数量
@@ -83,8 +78,8 @@ class KTEdgeWeightedGraph {
         val v = e.either()
         val w = e.other(v)
 
-        adj!![v].add(e)
-        adj!![w].add(e)
+        adj?.get(v)!!.add(e)
+        adj?.get(w)!!.add(e)
         E++
     }
 
@@ -94,7 +89,7 @@ class KTEdgeWeightedGraph {
      * @param v 指定的顶点
      * @return 边的集合
      */
-    fun adj(v: Int): Iterable<Edge> = adj!![v]
+    fun adj(v: Int): Iterable<Edge> = adj?.get(v)!!
 
     /**
      * 获取图中的所有边
@@ -104,7 +99,7 @@ class KTEdgeWeightedGraph {
     fun edges(): Iterable<Edge> {
         val b = Bag<Edge>()
         for (v in 0 until V) {
-            adj!![v].forEach { e ->
+            adj?.get(v)!!.forEach { e ->
                 if (e.other(v) > V) {
                     b.add(e)
                 }

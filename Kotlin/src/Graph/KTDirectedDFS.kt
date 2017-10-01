@@ -17,13 +17,13 @@ class KTDirectedDFS {
     /**
      * 有向图每个顶点的访问情况
      */
-    private var marked: Array<Boolean>? = null
+    private var marked: MutableList<Boolean?>? = null
 
     /**
      * 构造方法
      */
     constructor(G: Digraph, s: Int) {
-        marked = Array(G.V())
+        marked = MutableList(G.V(), { null })
         dfs(G, s)
     }
 
@@ -31,16 +31,11 @@ class KTDirectedDFS {
      * 构造方法
      */
     constructor(G: Digraph, sources: Iterable<Int>) {
-        marked = Array(G.V())
+        marked = MutableList(G.V(), { null })
         sources
-                .filterNot { marked!![it] }
+                .filterNot { marked?.get(it)!! }
                 .forEach { dfs(G, it) }
     }
-
-    /**
-     * 生成函数的辅助函数
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 深度优先搜索
@@ -51,7 +46,7 @@ class KTDirectedDFS {
     private fun dfs(G: Digraph, v: Int) {
         marked!![v] = true
         G.adj(v)
-                .filterNot { marked!![it] }
+                .filterNot { marked?.get(it)!! }
                 .forEach { dfs(G, it) }
     }
 
@@ -62,7 +57,7 @@ class KTDirectedDFS {
      * @return `true` 访问过
      *         `false` 未访问过
      */
-    fun marked(v: Int): Boolean = marked!![v]
+    fun marked(v: Int): Boolean = marked?.get(v)!!
 
     /**
      * 测试
