@@ -13,7 +13,7 @@ class KTMergeBU {
     /**
      * 用于暂存的数组
      */
-    private var aux: Array<Comparable<Any>>? = null
+    private var aux: MutableList<Comparable<Any>?>? = null
 
     /**
      * 归并排序
@@ -22,7 +22,7 @@ class KTMergeBU {
      */
     fun sort(a: Array<Comparable<Any>>) {
         val N = a.size
-        aux = Array(N)
+        aux = MutableList(N, { null })
         var sz = 1
         while (sz < N) {
             var lo = 0
@@ -34,13 +34,6 @@ class KTMergeBU {
             sz += sz
         }
     }
-
-    /**
-     * 用于初始化数组的辅助函数
-     *
-     * @param size 数组大小
-     */
-    private fun Array(size: Int): Array<Comparable<Any>> = Array(size)
 
     /**
      * 将两个有序数组归并为一个有序的数组
@@ -62,10 +55,10 @@ class KTMergeBU {
         // 归并回到 a[lo..hi]
         for (k in lo..hi) {
             when {
-                i > mid -> a[k] = aux!![j++]
-                j > hi -> a[k] = aux!![i++]
-                less(aux!![j], aux!![i]) -> a[k] = aux!![j++]
-                else -> a[k] = aux!![i++]
+                i > mid -> a[k] = aux?.get(j++)!!
+                j > hi -> a[k] = aux?.get(i++)!!
+                less(aux?.get(j)!!, aux?.get(i)!!) -> a[k] = aux?.get(j++)!!
+                else -> a[k] = aux?.get(i++)!!
             }
         }
     }

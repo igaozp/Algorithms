@@ -14,7 +14,7 @@ class KTMerge {
     /**
      * 用于暂存的数组
      */
-    private var aux: Array<Comparable<Any>>? = null
+    private var aux: MutableList<Comparable<Any>?>? = null
 
     /**
      * 归并排序
@@ -22,16 +22,9 @@ class KTMerge {
      * @param a 需要排序的数组
      */
     fun sort(a: Array<Comparable<Any>>) {
-        aux = Array(a.size)
+        aux = MutableList(a.size, { null })
         sort(a, 0, a.size - 1)
     }
-
-    /**
-     * 用于初始化数组的函数
-     *
-     * @param size 数组大小
-     */
-    private fun Array(size: Int): Array<Comparable<Any>> = Array(size)
 
     /**
      * 内部用于递归的归并排序
@@ -70,10 +63,10 @@ class KTMerge {
         // 归并回到 a[lo..hi]
         for (k in lo..hi) {
             when {
-                i > mid -> a[k] = aux!![j++]
-                j > hi -> a[k] = aux!![i++]
-                less(aux!![j], aux!![i]) -> a[k] = aux!![j++]
-                else -> a[k] = aux!![i++]
+                i > mid -> a[k] = aux?.get(j++)!!
+                j > hi -> a[k] = aux?.get(i++)!!
+                less(aux?.get(j)!!, aux?.get(i)!!) -> a[k] = aux?.get(j++)!!
+                else -> a[k] = aux?.get(i++)!!
             }
         }
     }

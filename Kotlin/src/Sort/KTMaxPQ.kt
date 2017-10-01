@@ -14,7 +14,7 @@ class KTMaxPQ<Key : Comparable<Key>>(maxN: Int) {
     /**
      * 存储基于堆的完全二叉树
      */
-    private var pq: Array<Key?>
+    private var pq: MutableList<Key?>? = null
     /**
      * 队列的大小
      */
@@ -24,13 +24,8 @@ class KTMaxPQ<Key : Comparable<Key>>(maxN: Int) {
      * 基于堆的优先队列的构造方法
      */
     init {
-        this.pq = Array(maxN + 1)
+        this.pq = MutableList(maxN + 1, { null })
     }
-
-    /**
-     * 用于初始化数组的函数
-     */
-    private fun Array(size: Int): Array<Key?> = Array(size)
 
     /**
      * 检查队列是否为空
@@ -53,7 +48,7 @@ class KTMaxPQ<Key : Comparable<Key>>(maxN: Int) {
      * @param v 插入的元素
      */
     fun insert(v: Key) {
-        pq[++N] = v
+        pq?.set(++N, v)
         swim(N)
     }
 
@@ -63,9 +58,9 @@ class KTMaxPQ<Key : Comparable<Key>>(maxN: Int) {
      * @return  队列的最大元素
      */
     fun delMax(): Key {
-        val max = pq[1]
+        val max = pq?.get(1)
         exch(1, N--)
-        pq[N + 1] = null
+        pq?.set(N + 1, null)
         sink(1)
         return max!!
     }
@@ -79,7 +74,7 @@ class KTMaxPQ<Key : Comparable<Key>>(maxN: Int) {
      *         `false` 第一个参数比第二个大
      */
     private fun less(i: Int, j: Int): Boolean {
-        return pq[i]!! < pq[j]!!
+        return pq?.get(i)!! < pq?.get(j)!!
     }
 
     /**
@@ -89,9 +84,9 @@ class KTMaxPQ<Key : Comparable<Key>>(maxN: Int) {
      * @param j 交换的第二个元素的下标
      */
     private fun exch(i: Int, j: Int) {
-        val t = pq[i]
-        pq[i] = pq[j]
-        pq[j] = t
+        val t = pq?.get(i)
+        pq?.set(i, pq!![j])
+        pq?.set(j, t)
     }
 
     /**
