@@ -13,7 +13,7 @@ class KTBoyerMoore(pat: String) {
     /**
      * 记录每个字符在模式中出现的最靠右的地方
      */
-    private var right: Array<Int>? = null
+    private var right: MutableList<Int?>? = null
     /**
      * 匹配的字符串（模式）
      */
@@ -25,7 +25,7 @@ class KTBoyerMoore(pat: String) {
     init {
         val M = pat.length
         val R = 256
-        right = Array(R)
+        right = MutableList(R, { null })
 
         for (c in 0 until R) {
             right!![c] = -1
@@ -35,11 +35,6 @@ class KTBoyerMoore(pat: String) {
             right!![pat[j].toInt()] = j
         }
     }
-
-    /**
-     * 初始化数组的辅助方法
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 
     /**
      * 字符串查找
@@ -56,7 +51,7 @@ class KTBoyerMoore(pat: String) {
             skip = 0
             for (j in (M - 1) downTo 0) {
                 if (pat!![j] != txt[i + j]) {
-                    skip = j - right!![txt[i + j].toInt()]
+                    skip = j - right?.get(txt[i + j].toInt())!!
                     if (skip < 1) {
                         skip = 1
                     }

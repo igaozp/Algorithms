@@ -17,7 +17,7 @@ class KTKMP(pat: String) {
     /**
      * 有限状态自动机
      */
-    private var dfa: Array<IntArray>? = null
+    private var dfa: MutableList<IntArray>? = null
 
     /**
      * KMP 构造方法
@@ -25,7 +25,7 @@ class KTKMP(pat: String) {
     init {
         val M = pat.length
         val R = 256
-        dfa = Array(R, {IntArray(M)})
+        dfa = MutableList(R, {IntArray(M)})
         dfa!![pat[0].toInt()][0] = 1
         var X = 0
         var j = 1
