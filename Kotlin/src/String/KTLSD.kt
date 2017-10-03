@@ -20,11 +20,11 @@ class KTLSD {
     fun sort(a: Array<String>, W: Int) {
         val N = a.size
         val R = 256
-        val aux = Array<String>(N)
+        val aux = Array(N, { "" })
 
         for (d in (W - 1) downTo 0) {
             // 计算出现的频率
-            val count = Array<Int>(R + 1)
+            val count = Array(R + 1, { 0 })
             for (s in a) {
                 count[s[d].toInt() + 1]++
             }
@@ -43,9 +43,4 @@ class KTLSD {
             System.arraycopy(aux, 0, a, 0, N)
         }
     }
-
-    /**
-     * 生成数组的辅助方法
-     */
-    private fun <T> Array(size: Int): Array<T> = Array(size)
 }
