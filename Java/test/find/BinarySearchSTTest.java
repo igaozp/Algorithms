@@ -1,4 +1,4 @@
-package base;
+package find;
 
 import edu.princeton.cs.algs4.BinarySearchST;
 import org.junit.Assert;
