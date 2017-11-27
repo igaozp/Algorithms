@@ -1,6 +1,9 @@
 package find;
 
 import base.Queue;
+import edu.princeton.cs.algs4.StdIn;
+
+import java.util.Scanner;
 
 /**
  * 二叉查找树
@@ -401,7 +404,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return 包含键的队列
      */
     private Iterable<Key> keys(Key lo, Key hi) {
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         keys(root, queue, lo, hi);
         return queue;
     }
@@ -428,6 +431,28 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
         if (cmpHi > 0) {
             keys(x.right, queue, lo, hi);
+        }
+    }
+
+    /**
+     * BST 的单元测试
+     *
+     * @param args 命令行参数
+     */
+    public static void main(String[] args) {
+        BST<String, Integer> bst = new BST<>();
+
+        int size;
+        Scanner scanner = new Scanner(System.in);
+        size = scanner.nextInt();
+
+        for (int i = 0; i < size; i++) {
+            String key = StdIn.readString();
+            bst.put(key, i);
+        }
+
+        for (String s : bst.keys()) {
+            System.out.println(s + " " + bst.get(s));
         }
     }
 }
