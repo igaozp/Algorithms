@@ -39,7 +39,7 @@ public class Queue<Item> implements Iterable<Item> {
      * 检查队列是否为空
      *
      * @return {@code true} 队列为空
-     * {@code false} 队列不为空
+     *         {@code false} 队列不为空
      */
     public boolean isEmpty() {
         return this.first == null;
