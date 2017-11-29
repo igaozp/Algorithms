@@ -1,8 +1,10 @@
 package find;
 
-import base.Queue;
+import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -28,20 +30,35 @@ public class BST<Key extends Comparable<Key>, Value> {
         private Key key;
         private Value val;
         private Node left, right;
-        private int N;
+        private int size;
 
         /**
          * 构造方法
          *
          * @param key 节点的键
          * @param val 节点的值
-         * @param N 子节点的数量
+         * @param size 子节点的数量
          */
-        public Node(Key key, Value val, int N) {
+        public Node(Key key, Value val, int size) {
             this.key = key;
             this.val = val;
-            this.N = N;
+            this.size = size;
         }
+    }
+
+    /**
+     * 默认的无参的构造方法
+     */
+    public BST() {}
+
+    /**
+     * 检查二叉查找树是否为空
+     *
+     * @return {@code true} 二叉树为空
+     *         {@code false} 二叉树不为空
+     */
+    public boolean isEmpty() {
+        return size() == 0;
     }
 
     /**
@@ -63,7 +80,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (x == null) {
             return 0;
         } else {
-            return x.N;
+            return x.size;
         }
     }
 
@@ -85,6 +102,9 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return 指定键的值
      */
     private Value get(Node x, Key key) {
+        if (key == null) {
+            throw new IllegalArgumentException("calls get() with a null key");
+        }
         if (x == null) {
             return null;
         }
@@ -107,7 +127,15 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @param val 节点的值
      */
     public void put(Key key, Value val) {
+        if (key == null) {
+            throw new IllegalArgumentException("calls put() with a null key");
+        }
+        if (val ==  null) {
+            delete(key);
+            return;
+        }
         root = put(root, key, val);
+        assert check();
     }
 
     /**
@@ -131,8 +159,34 @@ public class BST<Key extends Comparable<Key>, Value> {
         } else {
             x.val = val;
         }
-        x.N = size(x.left) + size(x.right) + 1;
+        x.size = size(x.left) + size(x.right) + 1;
 
+        return x;
+    }
+
+    /**
+     * 删除二叉树中的最小节点
+     */
+    public void deleteMin() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Symbol table underflow");
+        }
+        root = deleteMin(root);
+        assert check();
+    }
+
+    /**
+     * 在指定节点下删除最小的节点
+     *
+     * @param x 指定的节点
+     * @return 删除后的指定节点
+     */
+    private Node deleteMin(Node x) {
+        if (x.left == null) {
+            return x.right;
+        }
+        x.left = deleteMin(x.left);
+        x.size = size(x.left) + size(x.right) + 1;
         return x;
     }
 
@@ -142,6 +196,9 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return 最小元素的键
      */
     public Key min() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("calls min() with empty symbol table");
+        }
         return min(root).key;
     }
 
@@ -159,11 +216,40 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     /**
+     * 删除二叉树中的最大节点
+     */
+    public void deleteMax() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Symbol table underflow");
+        }
+        root = deleteMax(root);
+        assert check();
+    }
+
+    /**
+     * 删除二叉树中指定节点下的最大节点
+     *
+     * @param x 制定的节点
+     * @return 删除后的指定节点
+     */
+    private Node deleteMax(Node x) {
+        if (x.right == null) {
+            return x.left;
+        }
+        x.right = deleteMax(x.right);
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
+    }
+
+    /**
      * 获取二叉函数中最大元素的键
      *
      * @return 最大元素的键
      */
     public Key max() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("calls max() with empty symbol table");
+        }
         return max(root).key;
     }
 
@@ -187,6 +273,13 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return 不大于指定键的键
      */
     public Key floor(Key key) {
+        if (key == null) {
+            throw new IllegalArgumentException("argument to floor() is null");
+        }
+        if (isEmpty()) {
+            throw new NoSuchElementException("calls floor() with empty symbol table");
+        }
+
         Node x = floor(root, key);
         if (x == null) {
             return null;
@@ -228,6 +321,13 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return 不小于指定键的键
      */
     public Key ceiling(Key key) {
+        if (key == null) {
+            throw new IllegalArgumentException("argument to ceiling() is null");
+        }
+        if (isEmpty()) {
+            throw new NoSuchElementException("calls ceiling() with empty symbol table");
+        }
+
         Node x = ceiling(root, key);
         if (x == null) {
             return null;
@@ -269,6 +369,9 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return 子树的键
      */
     public Key select(int k) {
+        if (k < 0 || k >= size()) {
+            throw new IllegalArgumentException("argument to select() is invalid: " + k);
+        }
         return select(root, k).key;
     }
 
@@ -325,28 +428,6 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * 删除二叉树中最小的节点
-     */
-    public void deleteMin() {
-        root = deleteMin(root);
-    }
-
-    /**
-     * 在指定的节点下删除最小的节点
-     *
-     * @param x 指定的节点
-     * @return 删除后的指定节点
-     */
-    private Node deleteMin(Node x) {
-        if (x.left == null) {
-            return x.right;
-        }
-        x.left = deleteMin(x.left);
-        x.N = size(x.left) + size(x.right) + 1;
-        return x;
-    }
-
-    /**
      * 根据键删除相应的节点
      *
      * @param key 需要删除的节点的键
@@ -383,7 +464,7 @@ public class BST<Key extends Comparable<Key>, Value> {
             x.right = deleteMin(t.right);
             x.left = t.left;
         }
-        x.N = size(x.left) + size(x.right) + 1;
+        x.size = size(x.left) + size(x.right) + 1;
         return x;
     }
 
@@ -393,6 +474,9 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return 所有键的集合
      */
     public Iterable<Key> keys() {
+        if (isEmpty()) {
+            return new Queue<>();
+        }
         return keys(min(), max());
     }
 
@@ -404,6 +488,13 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return 包含键的队列
      */
     private Iterable<Key> keys(Key lo, Key hi) {
+        if (lo == null) {
+            throw new IllegalArgumentException("first argument to keys() is null");
+        }
+        if (hi == null) {
+            throw new IllegalArgumentException("second argument to keys() is null");
+        }
+
         Queue<Key> queue = new Queue<>();
         keys(root, queue, lo, hi);
         return queue;
@@ -432,6 +523,149 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (cmpHi > 0) {
             keys(x.right, queue, lo, hi);
         }
+    }
+
+    /**
+     * 获取二叉树的高度
+     *
+     * @return 二叉树的高度
+     */
+    public int height() {
+        return height(root);
+    }
+
+    /**
+     * 获取指定节点二叉树的盖度
+     *
+     * @param x 指定的节点
+     * @return 二叉树的高度
+     */
+    private int height(Node x) {
+        if (x == null) {
+            return -1;
+        }
+        return 1 + Math.max(height(x.left), height(x.right));
+    }
+
+    /**
+     * 二叉树层次遍历
+     *
+     * @return 层次遍历序列
+     */
+    public Iterable<Key> levelOrder() {
+        Queue<Key> keys = new Queue<>();
+        Queue<Node> queue = new Queue<>();
+        queue.enqueue(root);
+        while (!queue.isEmpty()) {
+            Node x = queue.dequeue();
+            if (x == null) {
+                continue;
+            }
+            keys.enqueue(x.key);
+            queue.enqueue(x.left);
+            queue.enqueue(x.right);
+        }
+        return keys;
+    }
+
+    /**
+     * 检查 BST 的完整性
+     *
+     * @return {@code true} 完整
+     *         {@code false} 不完整
+     */
+    private boolean check() {
+        if (!isBST()) {
+            StdOut.println("Not in symmetric order");
+        }
+        if (!isSizeConsistent()) {
+            StdOut.println("Subtree counts not consistent");
+        }
+        if (!isRankConsistent()) {
+            StdOut.println("Ranks not consistent");
+        }
+        return isBST() && isSizeConsistent() && isRankConsistent();
+    }
+
+    /**
+     * 检查该树是否是二叉树
+     *
+     * @return {@code true} 是二叉树
+     *         {@code false} 不是二叉树
+     */
+    private boolean isBST() {
+        return isBST(root, null, null);
+    }
+
+    /**
+     * 检查指定节点下是否是二叉树
+     *
+     * @param x 指定的节点
+     * @param min 最小范围
+     * @param max 最大范围
+     * @return {@code true} 是二叉树
+     *         {@code false} 不是二叉树
+     */
+    private boolean isBST(Node x, Key min, Key max) {
+        if (x == null) {
+            return true;
+        }
+
+        if (min != null && x.key.compareTo(min) <= 0) {
+            return false;
+        }
+        if (max != null && x.key.compareTo(max) <= 0) {
+            return false;
+        }
+
+        return isBST(x.left, min, x.key) && isBST(x.right, x.key, max);
+    }
+
+    /**
+     * 检查二叉树的大小是否一致
+     *
+     * @return {@code true} 一致
+     *         {@code false} 不一致
+     */
+    private boolean isSizeConsistent() {
+        return isSizeConsistent(root);
+    }
+
+    /**
+     * 检查指定节点下的二叉树的大小是否一致
+     *
+     * @param x 指定的节点
+     * @return {@code true} 一致
+     *         {@code false} 不一致
+     */
+    private boolean isSizeConsistent(Node x) {
+        if (x == null) {
+            return true;
+        }
+        if (x.size != size(x.left) + size(x.right) + 1) {
+            return false;
+        }
+        return isSizeConsistent(x.left) && isSizeConsistent(x.right);
+    }
+
+    /**
+     * 检测 {@code rank()} 的一致性
+     *
+     * @return {@code true} 一致
+     *         {@code false} 不一致
+     */
+    private boolean isRankConsistent() {
+        for (int i = 0; i < size(); i++) {
+            if (i != rank(select(i))) {
+                return false;
+            }
+        }
+        for (Key key : keys()) {
+            if (key.compareTo(select(rank(key))) != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
