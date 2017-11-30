@@ -1,8 +1,11 @@
 package base;
 
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * 使用链表实现的 Queue 队列
@@ -10,29 +13,38 @@ import java.util.Iterator;
  *
  * @param <Item> 泛型类型
  * @author igaozp
- * @version 1.1
+ * @version 1.2
  * @since 2017-6-30
  */
 public class Queue<Item> implements Iterable<Item> {
     /**
      * 队列的首节点
      */
-    private Node first;
+    private Node<Item> first;
     /**
      * 队列的最后一个节点
      */
-    private Node last;
+    private Node<Item> last;
     /**
      * 队列元素的数量
      */
-    private int N;
+    private int size;
 
     /**
      * 内部的链表节点类
      */
-    private class Node {
+    private class Node<Item> {
         Item item;
-        Node next;
+        Node<Item> next;
+    }
+
+    /**
+     * 构造方法
+     */
+    public Queue() {
+        first = null;
+        last = null;
+        size = 0;
     }
 
     /**
@@ -51,7 +63,20 @@ public class Queue<Item> implements Iterable<Item> {
      * @return 元素数量
      */
     public int size() {
-        return N;
+        return size;
+    }
+
+    /**
+     * 获取队列的头部节点元素
+     *
+     * @return 队列的头部节点元素
+     */
+    public Item peek() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue underflow");
+        }
+
+        return first.item;
     }
 
     /**
@@ -61,8 +86,8 @@ public class Queue<Item> implements Iterable<Item> {
      */
     public void enqueue(Item item) {
         // 新增节点
-        Node oldLast = this.last;
-        this.last = new Node();
+        Node<Item> oldLast = this.last;
+        this.last = new Node<>();
         this.last.item = item;
         this.last.next = null;
         // 根据队列是否为空，选择插入队列的策略
@@ -72,7 +97,7 @@ public class Queue<Item> implements Iterable<Item> {
             oldLast.next = this.last;
         }
         // 更新队列元素数量
-        N++;
+        size++;
     }
 
     /**
@@ -81,6 +106,10 @@ public class Queue<Item> implements Iterable<Item> {
      * @return 出队的元素
      */
     public Item dequeue() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue underflow");
+        }
+
         // 获取队列首节点元素，并使下一个元素成为队列的首节点
         Item item = this.first.item;
         this.first = this.first.next;
@@ -89,8 +118,23 @@ public class Queue<Item> implements Iterable<Item> {
             this.last = null;
         }
         // 更新队列元素数量
-        N--;
+        size--;
         return item;
+    }
+
+    /**
+     * 重写 {@code toString()} 方法
+     *
+     * @return string
+     */
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (Item item : this) {
+            s.append(item);
+            s.append(' ');
+        }
+        return s.toString();
     }
 
     /**
@@ -101,14 +145,23 @@ public class Queue<Item> implements Iterable<Item> {
     @Override
     @NotNull
     public Iterator<Item> iterator() {
-        return new ListIterator();
+        return new ListIterator<>(first);
     }
 
     /**
      * 自定义 ListIterator 类用来实现 Iterable 接口
      */
-    private class ListIterator implements Iterator<Item> {
-        private Node current = first;
+    private class ListIterator<Item> implements Iterator<Item> {
+        private Node<Item> current;
+
+        /**
+         * 构造方法
+         *
+         * @param first 构造方法参数
+         */
+        public ListIterator(Node<Item> first) {
+            current = first;
+        }
 
         /**
          * 检查是否有下一个元素
@@ -122,6 +175,14 @@ public class Queue<Item> implements Iterable<Item> {
         }
 
         /**
+         * 元素移除方法
+         */
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        /**
          * 获取下一个元素
          *
          * @return Item 泛型类型的对象
@@ -132,5 +193,18 @@ public class Queue<Item> implements Iterable<Item> {
             current = current.next;
             return item;
         }
+    }
+
+    public static void main(String[] args) {
+        Queue<String> queue = new Queue<>();
+        while (!StdIn.isEmpty()) {
+            String item = StdIn.readString();
+            if (!item.equals("-")) {
+                queue.enqueue(item);
+            } else if (!queue.isEmpty()) {
+                StdOut.println(queue.dequeue() + " ");
+            }
+        }
+        StdOut.println("(" + queue.size() + " left on queue)");
     }
 }
