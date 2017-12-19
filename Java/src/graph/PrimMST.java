@@ -33,7 +33,7 @@ public class PrimMST {
      *
      * @param G 加权无向图
      */
-    public PrimMST(EdgeWeightedGraph G) {
+    private PrimMST(EdgeWeightedGraph G) {
         edgeTo = new Edge[G.V()];
         distTo = new double[G.V()];
         marked = new boolean[G.V()];
@@ -48,7 +48,7 @@ public class PrimMST {
             visit(G, pq.delMin());
         }
 
-
+        assert check(G);
     }
 
     /**
