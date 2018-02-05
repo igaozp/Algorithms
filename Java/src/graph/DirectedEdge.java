@@ -34,6 +34,9 @@ public class DirectedEdge {
         if (v < 0 || w < 0) {
             throw new IllegalArgumentException("Vertex names must be nonnegative integers");
         }
+        if (Double.isNaN(weight)) {
+            throw new IllegalArgumentException("Weight is NaN");
+        }
         this.v = v;
         this.w = w;
         this.weight = weight;
