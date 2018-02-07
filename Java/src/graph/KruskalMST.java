@@ -71,9 +71,9 @@ public class KruskalMST {
     }
 
     /**
-     * 检查带权重的有向图
+     * 检查带权重的无向图
      *
-     * @param G 有向图
+     * @param G 无向图
      * @return 检查结果
      */
     private boolean check(EdgeWeightedGraph G) {
