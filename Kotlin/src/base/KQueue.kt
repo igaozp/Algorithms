@@ -8,7 +8,7 @@ package base
  * @version 1.1
  * @since 2017-08-30
  */
-class KTQueue<Item> : Iterable<Item> {
+class KQueue<Item> : Iterable<Item> {
     // 队列的首节点
     private var first: Node? = null
     // 队列的最后一个节点

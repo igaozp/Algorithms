@@ -8,7 +8,7 @@ package base
  * @version 1.0
  * @since 2017-08-30
  */
-class KTBag<Item> : Iterable<Item> {
+class KBag<Item> : Iterable<Item> {
     // 链表的首节点
     private var first: Node? = null
     // Bag 中元素的数量
