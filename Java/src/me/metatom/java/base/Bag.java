@@ -96,7 +96,7 @@ public class Bag<Item> implements Iterable<Item> {
          *
          * @param first 构造方法的参数
          */
-        public ListIterator(Node<Item> first) {
+        ListIterator(Node<Item> first) {
             current = first;
         }
 
@@ -134,7 +134,7 @@ public class Bag<Item> implements Iterable<Item> {
     }
 
     /**
-     * Bag 的单元测书
+     * Bag 的单元测试
      *
      * @param args 命令行参数
      */
