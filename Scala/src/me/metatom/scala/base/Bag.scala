@@ -25,7 +25,7 @@ class Bag[Item >: Null <: AnyRef](implicit manifest: Manifest[Item]) {
     * 内部节点类
     */
   class Node {
-    var item = manifest.erasure.newInstance.asInstanceOf[Item]
+    var item = manifest.runtimeClass.getConstructor().newInstance().asInstanceOf[Item]
     var next: Node = _
   }
 
