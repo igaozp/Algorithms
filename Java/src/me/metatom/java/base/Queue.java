@@ -124,7 +124,7 @@ public class Queue<Item> implements Iterable<Item> {
     /**
      * 重写 {@code toString()} 方法
      *
-     * @return me.metatom.java.string
+     * @return string
      */
     @Override
     public String toString() {
@@ -157,7 +157,7 @@ public class Queue<Item> implements Iterable<Item> {
          *
          * @param first 构造方法参数
          */
-        public ListIterator(Node<Item> first) {
+        ListIterator(Node<Item> first) {
             current = first;
         }
 
