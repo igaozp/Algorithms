@@ -64,15 +64,15 @@ class Queue[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
     */
   def enqueue(item: T): Unit = {
     // 新增节点
-    val oldLast = this.last
-    this.last = new Node
-    this.last.item = item
-    this.last.next = null
+    val oldLast = last
+    last = new Node
+    last.item = item
+    last.next = null
     // 根据队列是否为空，选择插入队列的策略
     if (isEmpty) {
-      this.first = this.last
+      first = last
     } else {
-      oldLast.next = this.last
+      oldLast.next = last
     }
     // 更新队列元素数量
     size += 1
@@ -88,11 +88,11 @@ class Queue[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
       throw new NoSuchElementException("Queue underflow")
     }
     // 获取队列首节点元素，并使下一个元素成为队列的首节点
-    val item = this.first.item
-    this.first = this.first.next
+    val item = first.item
+    first = first.next
     // 队列若为空，队列尾节点置空
     if (isEmpty) {
-      this.last = null
+      last = null
     }
     // 更新队列元素数量
     size -= 1
@@ -100,7 +100,12 @@ class Queue[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
   }
 }
 
-object QueueMain {
+object Queue {
+  /**
+    * 单元测试
+    *
+    * @param args 命令行参数
+    */
   def main(args: Array[String]): Unit = {
     val queue = new Queue[String]()
     queue.enqueue("Hello")

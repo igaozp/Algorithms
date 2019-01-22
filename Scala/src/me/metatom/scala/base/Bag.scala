@@ -9,9 +9,9 @@ import scala.reflect.Manifest
   * @author igaozp
   * @since 2019-01-19
   * @version 1.0
-  * @tparam Item 泛型参数
+  * @tparam T 泛型参数
   */
-class Bag[Item >: Null <: AnyRef](implicit manifest: Manifest[Item]) {
+class Bag[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
   /**
     * 链表首节点
     */
@@ -25,7 +25,7 @@ class Bag[Item >: Null <: AnyRef](implicit manifest: Manifest[Item]) {
     * 内部节点类
     */
   class Node {
-    var item = manifest.runtimeClass.getConstructor().newInstance().asInstanceOf[Item]
+    var item = manifest.runtimeClass.getConstructor().newInstance().asInstanceOf[T]
     var next: Node = _
   }
 
@@ -49,16 +49,16 @@ class Bag[Item >: Null <: AnyRef](implicit manifest: Manifest[Item]) {
     *
     * @param item 添加的元素对象
     */
-  def add(item: Item): Unit = {
-    val oldFirst: Node = this.first
-    this.first = new Node
-    this.first.item = item
-    this.first.next = oldFirst
+  def add(item: T): Unit = {
+    val oldFirst: Node = first
+    first = new Node
+    first.item = item
+    first.next = oldFirst
     size += 1
   }
 }
 
-object Main {
+object Bag {
   /**
     * Bag 的单元测试
     *
