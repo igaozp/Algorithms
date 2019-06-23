@@ -26,7 +26,7 @@ class Queue[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
     * 内部的链表节点类
     */
   class Node {
-    var item = manifest.runtimeClass.getConstructor().newInstance().asInstanceOf[T]
+    var item: T = manifest.runtimeClass.getConstructor().newInstance().asInstanceOf[T]
     var next: Node = _
   }
 
