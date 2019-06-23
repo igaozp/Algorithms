@@ -65,6 +65,7 @@ public class Huffman {
          * @param that 其他的节点
          * @return 出现次数之差
          */
+        @Override
         public int compareTo(Node that) {
             return this.freq - that.freq;
         }

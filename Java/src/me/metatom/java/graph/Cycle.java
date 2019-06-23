@@ -23,12 +23,19 @@ public class Cycle {
      * @param G 初始化的图
      */
     public Cycle(Graph G) {
-        if (hasSelfLoop(G)) return;
-        if (hasParallelEdges(G)) return;
+        if (hasSelfLoop(G)) {
+            return;
+        }
+        if (hasParallelEdges(G)) {
+            return;
+        }
         marked = new boolean[G.V()];
         edgeTo = new int[G.V()];
-        for (int s = 0; s < G.V(); s++)
-            if (!marked[s]) dfs(G, s, s);
+        for (int s = 0; s < G.V(); s++) {
+            if (!marked[s]) {
+                dfs(G, s, s);
+            }
+        }
     }
 
     /**
@@ -91,7 +98,9 @@ public class Cycle {
     private void dfs(Graph G, int v, int u) {
         marked[v] = true;
         for (int w : G.adj(v)) {
-            if (cycle != null) return;
+            if (cycle != null) {
+                return;
+            }
 
             if (!marked[w]) {
                 edgeTo[w] = v;

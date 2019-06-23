@@ -33,7 +33,9 @@ public class Quick {
      * @param hi 排序数组的结束下标
      */
     private static void sort(Comparable[] a, int lo, int hi) {
-        if (hi <= lo) return;
+        if (hi <= lo) {
+            return;
+        }
         // 将数组切分为两部分，获得切分下标
         int j = partition(a, lo, hi);
         // 将左半部分排序

@@ -82,10 +82,12 @@ public class Edge implements Comparable<Edge> {
      * @param that 另一条边
      * @return 比较结果
      */
+    @Override
     public int compareTo(Edge that) {
         return Double.compare(this.weight, that.weight);
     }
 
+    @Override
     public String toString() {
         return String.format("%d-%d %.2f", v, w, weight);
     }

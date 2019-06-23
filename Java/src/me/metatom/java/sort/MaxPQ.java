@@ -252,11 +252,17 @@ public class MaxPQ<Key> implements Iterable<Key> {
      * {@code false} 不是最大堆
      */
     private boolean isMaxHeap(int k) {
-        if (k > N) return true;
+        if (k > N) {
+            return true;
+        }
         int left = 2 * k;
         int right = 2 * k + 1;
-        if (left <= N && less(k, left)) return false;
-        if (right <= N && less(k, right)) return false;
+        if (left <= N && less(k, left)) {
+            return false;
+        }
+        if (right <= N && less(k, right)) {
+            return false;
+        }
         return isMaxHeap(left) && isMaxHeap(right);
     }
 
@@ -279,14 +285,17 @@ public class MaxPQ<Key> implements Iterable<Key> {
             }
         }
 
+        @Override
         public boolean hasNext() {
             return !copy.isEmpty();
         }
 
+        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public Key next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();

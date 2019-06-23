@@ -76,7 +76,9 @@ public class DepthFirstPaths {
      */
     public Iterable<Integer> pathTo(int v) {
         validateVertex(v);
-        if (!hasPathTo(v)) return null;
+        if (!hasPathTo(v)) {
+            return null;
+        }
         Stack<Integer> path = new Stack<>();
         for (int x = v; x != s; x = edgeTo[x]) {
             path.push(x);

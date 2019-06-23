@@ -34,7 +34,9 @@ public class Merge {
      * @param hi 排序数组的最大下标
      */
     private static void sort(Comparable[] a, int lo, int hi) {
-        if (hi <= lo) return;
+        if (hi <= lo) {
+            return;
+        }
         int mid = lo + (hi - lo) / 2;
         // 将数组分为两部分，对两部分分别排序
         sort(a, lo, mid);

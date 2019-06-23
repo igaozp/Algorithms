@@ -202,7 +202,9 @@ public class TriesST<Value> {
      * @param q   存储匹配的字符串
      */
     private void collect(Node x, StringBuilder pre, String pat, Queue<String> q) {
-        if (x == null) return;
+        if (x == null) {
+            return;
+        }
         int d = pre.length();
         if (d == pat.length() && x.val != null) {
             q.enqueue(pre.toString());
@@ -327,12 +329,14 @@ public class TriesST<Value> {
         StdOut.println();
 
         StdOut.println("keysWithPrefix(\"shor\"):");
-        for (String s : st.keysWithPrefix("shor"))
+        for (String s : st.keysWithPrefix("shor")) {
             StdOut.println(s);
+        }
         StdOut.println();
 
         StdOut.println("keysThatMatch(\".he.l.\"):");
-        for (String s : st.keysThatMatch(".he.l."))
+        for (String s : st.keysThatMatch(".he.l.")) {
             StdOut.println(s);
+        }
     }
 }

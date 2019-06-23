@@ -46,7 +46,9 @@ public class DirectedDFS {
         marked = new boolean[G.V()];
         validateVertices(sources);
         for (int s : sources) {
-            if (!marked[s]) dfs(G, s);
+            if (!marked[s]) {
+                dfs(G, s);
+            }
         }
     }
 
@@ -60,7 +62,9 @@ public class DirectedDFS {
         count++;
         marked[v] = true;
         for (int w : G.adj(v)) {
-            if (!marked[w]) dfs(G, w);
+            if (!marked[w]) {
+                dfs(G, w);
+            }
         }
     }
 

@@ -146,10 +146,14 @@ public class BreadthFirstPaths {
      */
     public Iterable<Integer> pathTo(int v) {
         validateVertex(v);
-        if (!hasPathTo(v)) return null;
+        if (!hasPathTo(v)) {
+            return null;
+        }
         Stack<Integer> path = new Stack<>();
         int x;
-        for (x = v; distTo[x] != 0; x = edgeTo[x]) path.push(x);
+        for (x = v; distTo[x] != 0; x = edgeTo[x]) {
+            path.push(x);
+        }
         path.push(x);
         return path;
     }
@@ -186,7 +190,9 @@ public class BreadthFirstPaths {
         }
 
         for (int w = 0; w < G.V(); w++) {
-            if (!hasPathTo(w) || w == s) continue;
+            if (!hasPathTo(w) || w == s) {
+                continue;
+            }
             int v = edgeTo[w];
             if (distTo[w] != distTo[v] + 1) {
                 StdOut.println("shortest path edges " + v + "-" + w);

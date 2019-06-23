@@ -151,7 +151,9 @@ public class PrimMST {
             for (Edge f : edges()) {
                 int x = f.either();
                 int y = f.other(x);
-                if (f != e) uf.union(x, y);
+                if (f != e) {
+                    uf.union(x, y);
+                }
             }
 
             for (Edge f : G.edges()) {

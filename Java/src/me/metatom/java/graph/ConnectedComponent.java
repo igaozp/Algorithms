@@ -79,7 +79,9 @@ public class ConnectedComponent {
 
         // 访问与 v 连通的顶点
         for (int w : G.adj(v)) {
-            if (!marked[w]) dfs(G, w);
+            if (!marked[w]) {
+                dfs(G, w);
+            }
         }
     }
 
@@ -97,7 +99,9 @@ public class ConnectedComponent {
         // 访问与 v 连通的顶点
         for (Edge e : G.adj(v)) {
             int w = e.other(v);
-            if (!marked[w]) dfs(G, w);
+            if (!marked[w]) {
+                dfs(G, w);
+            }
         }
     }
 

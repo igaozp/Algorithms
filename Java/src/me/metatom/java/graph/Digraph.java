@@ -193,6 +193,7 @@ public class Digraph {
         return R;
     }
 
+    @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append(V + " vertices, " + E + " edges " + NEWLINE);

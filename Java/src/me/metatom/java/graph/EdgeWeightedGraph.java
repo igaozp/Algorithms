@@ -55,7 +55,9 @@ public class EdgeWeightedGraph {
      */
     public EdgeWeightedGraph(int V, int E) {
         this(V);
-        if (E < 0) throw new IllegalArgumentException("Number of edges must be nonnegative");
+        if (E < 0) {
+            throw new IllegalArgumentException("Number of edges must be nonnegative");
+        }
         for (int i = 0; i < E; i++) {
             int v = StdRandom.uniform(V);
             int w = StdRandom.uniform(V);
@@ -73,7 +75,9 @@ public class EdgeWeightedGraph {
     public EdgeWeightedGraph(In in) {
         this(in.readInt());
         int E = in.readInt();
-        if (E < 0) throw new IllegalArgumentException("Number of edges must be noonegative");
+        if (E < 0) {
+            throw new IllegalArgumentException("Number of edges must be noonegative");
+        }
         for (int i = 0; i < E; i++) {
             int v = in.readInt();
             int w = in.readInt();

@@ -846,7 +846,9 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         int black = 0;
         Node x = root;
         while (x != null) {
-            if (!isRed(x)) black++;
+            if (!isRed(x)) {
+                black++;
+            }
             x = x.left;
         }
         return isBalanced(root, black);

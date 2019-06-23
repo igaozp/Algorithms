@@ -94,9 +94,11 @@ public class MSD {
      * @param d  字符位置
      */
     private static void insertion(String[] a, int lo, int hi, int d) {
-        for (int i = lo; i <= hi; i++)
-            for (int j = i; j > lo && less(a[j], a[j - 1], d); j--)
+        for (int i = lo; i <= hi; i++) {
+            for (int j = i; j > lo && less(a[j], a[j - 1], d); j--) {
                 exch(a, j, j - 1);
+            }
+        }
     }
 
     /**
@@ -123,8 +125,12 @@ public class MSD {
      */
     private static boolean less(String v, String w, int d) {
         for (int i = d; i < Math.min(v.length(), w.length()); i++) {
-            if (v.charAt(i) < w.charAt(i)) return true;
-            if (v.charAt(i) > w.charAt(i)) return false;
+            if (v.charAt(i) < w.charAt(i)) {
+                return true;
+            }
+            if (v.charAt(i) > w.charAt(i)) {
+                return false;
+            }
         }
         return v.length() < w.length();
     }
@@ -138,7 +144,8 @@ public class MSD {
         String[] a = StdIn.readAllStrings();
         int n = a.length;
         sort(a);
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             StdOut.println(a[i]);
+        }
     }
 }

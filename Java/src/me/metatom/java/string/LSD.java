@@ -33,7 +33,9 @@ public class LSD {
             }
 
             // 将频率转换为索引
-            for (int r = 0; r < R; r++) count[r + 1] += count[r];
+            for (int r = 0; r < R; r++) {
+                count[r + 1] += count[r];
+            }
 
             // 将元素分类
             for (String s : a) {
@@ -56,14 +58,16 @@ public class LSD {
 
         // check that strings have fixed length
         int w = a[0].length();
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             assert a[i].length() == w : "Strings must have fixed length";
+        }
 
         // me.metatom.java.sort the strings
         sort(a, w);
 
         // print results
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             StdOut.println(a[i]);
+        }
     }
 }

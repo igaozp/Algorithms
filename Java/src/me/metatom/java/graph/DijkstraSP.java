@@ -136,7 +136,9 @@ public class DijkstraSP {
             return false;
         }
         for (int v = 0; v < G.V(); v++) {
-            if (v == s) continue;
+            if (v == s) {
+                continue;
+            }
             if (edgeTo[v] == null && distTo[v] != Double.POSITIVE_INFINITY) {
                 System.err.println("distTo[] and edgeTo[] inconsistent");
                 return false;
@@ -154,7 +156,9 @@ public class DijkstraSP {
         }
 
         for (int w = 0; w < G.V(); w++) {
-            if (edgeTo[w] == null) continue;
+            if (edgeTo[w] == null) {
+                continue;
+            }
             DirectedEdge e = edgeTo[w];
             int v = e.from();
             if (w != e.to()) {

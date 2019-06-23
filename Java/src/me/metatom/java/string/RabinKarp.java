@@ -131,8 +131,9 @@ public class RabinKarp {
 
         // from brute force search method 1
         StdOut.print("pattern: ");
-        for (int i = 0; i < offset; i++)
+        for (int i = 0; i < offset; i++) {
             StdOut.print(" ");
+        }
         StdOut.println(pat);
     }
 }

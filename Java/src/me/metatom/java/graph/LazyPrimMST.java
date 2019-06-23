@@ -38,7 +38,9 @@ public class LazyPrimMST {
         mst = new Queue<>();
         marked = new boolean[G.V()];
         for (int v = 0; v < G.V(); v++) {
-            if (!marked[v]) prim(G, v);
+            if (!marked[v]) {
+                prim(G, v);
+            }
         }
 
         assert check(G);
@@ -62,8 +64,12 @@ public class LazyPrimMST {
             }
             mst.enqueue(e);
             weight += e.weight();
-            if (!marked[v]) scan(G, v);
-            if (!marked[w]) scan(G, w);
+            if (!marked[v]) {
+                scan(G, v);
+            }
+            if (!marked[w]) {
+                scan(G, w);
+            }
         }
     }
 
@@ -147,7 +153,9 @@ public class LazyPrimMST {
             for (Edge f : mst) {
                 int x = f.either();
                 int y = f.other(x);
-                if (f != e) uf.union(x, y);
+                if (f != e) {
+                    uf.union(x, y);
+                }
             }
 
             // check that e is min weight edge in crossing cut
