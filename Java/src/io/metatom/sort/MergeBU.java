@@ -9,6 +9,7 @@ package io.metatom.sort;
  * @version 1.0
  * @since 2017-7-2
  */
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public class MergeBU {
     /**
      * 用于暂存的数组

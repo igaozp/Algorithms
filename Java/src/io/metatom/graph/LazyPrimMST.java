@@ -9,6 +9,7 @@ import edu.princeton.cs.algs4.*;
  * @version 1.0
  * @since 2017-07-17
  */
+@SuppressWarnings("DuplicatedCode")
 public class LazyPrimMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;
     /**

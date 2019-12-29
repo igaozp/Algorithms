@@ -14,6 +14,7 @@ import java.util.Stack;
  * @version 1.0
  * @since 2017-07-14
  */
+@SuppressWarnings("unused")
 public class DepthFirstOrder {
     /**
      * 存储顶点的访问状态

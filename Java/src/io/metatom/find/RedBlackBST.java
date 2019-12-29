@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.StdOut;
 import io.metatom.base.Queue;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * 红黑二叉查找树
@@ -18,6 +19,7 @@ import java.util.NoSuchElementException;
  * @version 1.1
  * @since 2017-07-07
  */
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public class RedBlackBST<Key extends Comparable<Key>, Value> {
     /**
      * 红黑树节点颜色，使用 true 代表红色，false 代表黑色
@@ -550,11 +552,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             return floor(x.left, key);
         }
         Node t = floor(x.right, key);
-        if (t != null) {
-            return t;
-        } else {
-            return x;
-        }
+        return Objects.requireNonNullElse(t, x);
     }
 
     /**
@@ -597,11 +595,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             return ceiling(x.right, key);
         }
         Node t = ceiling(x.left, key);
-        if (t != null) {
-            return t;
-        } else {
-            return x;
-        }
+        return Objects.requireNonNullElse(t, x);
     }
 
     /**

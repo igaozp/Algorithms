@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
  * @version 1.1
  * @since 2017-07-04
  */
+@SuppressWarnings("unused")
 public class BinarySearchST<Key extends Comparable<Key>, Value> {
     /**
      * 默认的初始化大小

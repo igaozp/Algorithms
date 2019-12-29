@@ -9,6 +9,7 @@ import edu.princeton.cs.algs4.*;
  * @version 1.0
  * @since 2017-07-18
  */
+@SuppressWarnings("unused")
 public class EdgeWeightedDigraph {
     private static final String NEWLINE = System.getProperty("line.separator");
     /**

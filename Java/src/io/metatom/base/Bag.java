@@ -29,7 +29,7 @@ public class Bag<Item> implements Iterable<Item> {
     /**
      * 内部的链表节点类
      */
-    private class Node<Item> {
+    private static class Node<Item> {
         private Item item;
         private Node<Item> next;
     }
@@ -88,7 +88,7 @@ public class Bag<Item> implements Iterable<Item> {
     /**
      * 自定义 ListIterator 用来实现 Iterable 接口
      */
-    private class ListIterator<Item> implements Iterator<Item> {
+    private static class ListIterator<Item> implements Iterator<Item> {
         private Node<Item> current;
 
         /**

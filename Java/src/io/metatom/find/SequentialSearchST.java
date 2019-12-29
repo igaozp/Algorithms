@@ -15,6 +15,7 @@ import io.metatom.base.Queue;
  * @version 1.0
  * @since 2017-07-04
  */
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public class SequentialSearchST<Key, Value> {
     /**
      * 表的元素数量

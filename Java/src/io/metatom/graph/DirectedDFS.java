@@ -14,6 +14,7 @@ import edu.princeton.cs.algs4.StdOut;
  * @version 1.0
  * @since 2017-07-14
  */
+@SuppressWarnings("DuplicatedCode")
 public class DirectedDFS {
     /**
      * 有向图每个顶点的访问情况

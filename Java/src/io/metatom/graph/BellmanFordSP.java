@@ -11,6 +11,7 @@ import edu.princeton.cs.algs4.*;
  * @version 1.0
  * @since 2017-07-19
  */
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public class BellmanFordSP {
     /**
      * 到某个顶点的路径长度

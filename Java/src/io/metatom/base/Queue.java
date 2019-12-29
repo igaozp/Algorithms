@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
  * @version 1.2
  * @since 2017-6-30
  */
+@SuppressWarnings("unused")
 public class Queue<Item> implements Iterable<Item> {
     /**
      * 队列的首节点
@@ -32,7 +33,7 @@ public class Queue<Item> implements Iterable<Item> {
     /**
      * 内部的链表节点类
      */
-    private class Node<Item> {
+    private static class Node<Item> {
         Item item;
         Node<Item> next;
     }
@@ -149,7 +150,7 @@ public class Queue<Item> implements Iterable<Item> {
     /**
      * 自定义 ListIterator 类用来实现 Iterable 接口
      */
-    private class ListIterator<Item> implements Iterator<Item> {
+    private static class ListIterator<Item> implements Iterator<Item> {
         private Node<Item> current;
 
         /**

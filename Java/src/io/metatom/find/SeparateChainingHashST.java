@@ -15,6 +15,7 @@ import io.metatom.base.Queue;
  * @version 1.1
  * @since 2017-07-10
  */
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public class SeparateChainingHashST<Key, Value> {
     /**
      * 默认的初始化大小

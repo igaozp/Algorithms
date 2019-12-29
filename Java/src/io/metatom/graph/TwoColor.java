@@ -10,6 +10,7 @@ package io.metatom.graph;
  * @version 1.0
  * @since 2017-07-13
  */
+@SuppressWarnings("unused")
 public class TwoColor {
     /**
      * 存储顶点的访问情况

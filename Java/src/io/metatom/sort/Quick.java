@@ -12,6 +12,7 @@ import edu.princeton.cs.algs4.StdRandom;
  * @version 1.0
  * @since 2017-7-2
  */
+@SuppressWarnings({"unused"})
 public class Quick {
     /**
      * 快速排序

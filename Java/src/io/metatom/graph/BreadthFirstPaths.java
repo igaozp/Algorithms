@@ -13,6 +13,7 @@ import java.util.Stack;
  * @version 1.0
  * @since 2017-07-12
  */
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public class BreadthFirstPaths {
     private static final int INFINITY = Integer.MAX_VALUE;
     /**

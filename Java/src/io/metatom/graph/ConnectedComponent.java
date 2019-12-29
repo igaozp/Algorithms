@@ -12,6 +12,7 @@ import edu.princeton.cs.algs4.*;
  * @version 1.0
  * @since 2017-07-13
  */
+@SuppressWarnings("unused")
 public class ConnectedComponent {
     /**
      * 存储图中顶点的访问状态

@@ -18,6 +18,7 @@ import java.util.Stack;
  * @version 1.0
  * @since 2017-07-11
  */
+@SuppressWarnings("unused")
 public class Graph {
     private static final String NEWLINE = System.getProperty("line.separator");
     /**

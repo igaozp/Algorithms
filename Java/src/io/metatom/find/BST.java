@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -16,6 +17,7 @@ import java.util.Scanner;
  * @version 1.0
  * @since 2017-07-05
  */
+@SuppressWarnings("unused")
 public class BST<Key extends Comparable<Key>, Value> {
     /**
      * 二叉树的根节点
@@ -307,11 +309,7 @@ public class BST<Key extends Comparable<Key>, Value> {
             return floor(x.left, key);
         }
         Node t = floor(x.right, key);
-        if (t != null) {
-            return t;
-        } else {
-            return x;
-        }
+        return Objects.requireNonNullElse(t, x);
     }
 
     /**
@@ -355,11 +353,7 @@ public class BST<Key extends Comparable<Key>, Value> {
             return ceiling(x.right, key);
         }
         Node t = ceiling(x.left, key);
-        if (t != null) {
-            return t;
-        } else {
-            return x;
-        }
+        return Objects.requireNonNullElse(t, x);
     }
 
     /**

@@ -14,6 +14,7 @@ import java.util.Stack;
  * @version 1.0
  * @since 2017-07-16
  */
+@SuppressWarnings("unused")
 public class EdgeWeightedGraph {
     private static final String NEWLINE = System.getProperty("line.separator");
     /**

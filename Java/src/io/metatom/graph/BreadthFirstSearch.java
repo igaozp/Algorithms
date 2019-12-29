@@ -9,6 +9,7 @@ import io.metatom.base.Queue;
  * @version 1.0
  * @since 2017-07-12
  */
+@SuppressWarnings("unused")
 public class BreadthFirstSearch {
     /**
      * 存储图顶点的访问情况

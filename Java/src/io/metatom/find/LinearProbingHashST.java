@@ -14,6 +14,7 @@ import io.metatom.base.Queue;
  * @version 1.0
  * @since 2017-07-10
  */
+@SuppressWarnings("unused")
 public class LinearProbingHashST<Key, Value> {
     /**
      * 默认初始化的大小

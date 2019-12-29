@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
  * @version 1.0
  * @since 2017-7-3
  */
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public class MaxPQ<Key> implements Iterable<Key> {
     /**
      * 存储基于堆的完全二叉树

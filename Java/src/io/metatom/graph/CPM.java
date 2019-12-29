@@ -11,6 +11,7 @@ import edu.princeton.cs.algs4.*;
  * @version 1.1
  * @since 2017-07-19
  */
+@SuppressWarnings("unused")
 public class CPM {
     /**
      * 构造方法

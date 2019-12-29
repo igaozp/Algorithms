@@ -11,6 +11,7 @@ import edu.princeton.cs.algs4.*;
  * @version 1.0
  * @since 2017-07-15
  */
+@SuppressWarnings("DuplicatedCode")
 public class KosarajuSCC {
     /**
      * 存储顶点的访问情况

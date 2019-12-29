@@ -13,6 +13,7 @@ import io.metatom.base.Queue;
  * @version 1.0
  * @since 2017-07-17
  */
+@SuppressWarnings("DuplicatedCode")
 public class KruskalMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;
     /**
