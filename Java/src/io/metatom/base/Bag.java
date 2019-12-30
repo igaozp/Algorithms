@@ -1,8 +1,5 @@
 package io.metatom.base;
 
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -45,8 +42,7 @@ public class Bag<Item> implements Iterable<Item> {
     /**
      * 检查 Bag 是否为空
      *
-     * @return {@code true} 为空
-     * {@code false} 不为空
+     * @return {@code true} 为空 {@code false} 不为空
      */
     public boolean isEmpty() {
         return first == null;
@@ -63,12 +59,12 @@ public class Bag<Item> implements Iterable<Item> {
 
     /**
      * 添加元素
+     * 使用头插法插入新的元素
      *
      * @param item 添加的元素
      */
     public void add(Item item) {
-        // 使用头插法插入新的元素
-        Node<Item> oldFirst = this.first;
+        var oldFirst = this.first;
         this.first = new Node<>();
         this.first.item = item;
         this.first.next = oldFirst;
@@ -103,14 +99,16 @@ public class Bag<Item> implements Iterable<Item> {
         /**
          * 检查是否有下一个元素
          *
-         * @return {@code true} 有下一个元素
-         * {@code false} 没有下一个元素
+         * @return {@code true} 有下一个元素 {@code false} 没有下一个元素
          */
         @Override
         public boolean hasNext() {
             return current != null;
         }
 
+        /**
+         * 移除元素（暂不支持）
+         */
         @Override
         public void remove() {
             throw new UnsupportedOperationException();
@@ -126,8 +124,7 @@ public class Bag<Item> implements Iterable<Item> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-
-            Item item = current.item;
+            var item = current.item;
             current = current.next;
             return item;
         }
@@ -139,15 +136,13 @@ public class Bag<Item> implements Iterable<Item> {
      * @param args 命令行参数
      */
     public static void main(String[] args) {
-        Bag<String> bag = new Bag<>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
-            bag.add(item);
-        }
+        var bag = new Bag<String>();
+        bag.add("Hello");
+        bag.add("World");
 
-        StdOut.println("size of bag = " + bag.size());
+        System.out.println("size of bag = " + bag.size());
         for (String s : bag) {
-            StdOut.println(s);
+            System.out.println(s);
         }
     }
 }
