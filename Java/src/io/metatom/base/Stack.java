@@ -1,10 +1,8 @@
 package io.metatom.base;
 
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 /**
  * Stack 链表的实现
@@ -45,8 +43,7 @@ public class Stack<Item> implements Iterable<Item> {
     /**
      * 检查栈是否为空
      *
-     * @return {@code true} 栈为空
-     * {@code false} 栈不为空
+     * @return {@code true} 栈为空 {@code false} 栈不为空
      */
     public boolean isEmpty() {
         return first == null;
@@ -68,7 +65,7 @@ public class Stack<Item> implements Iterable<Item> {
      */
     public void push(Item item) {
         // 使用头插法将元素入栈
-        Node<Item> oldFirst = this.first;
+        var oldFirst = this.first;
         this.first = new Node<>();
         this.first.item = item;
         this.first.next = oldFirst;
@@ -85,13 +82,11 @@ public class Stack<Item> implements Iterable<Item> {
         if (isEmpty()) {
             throw new NoSuchElementException("Stack underflow");
         }
-
         // 获取头节点的元素，并更新头节点
         Item item = first.item;
         first = first.next;
         // 更新节点的数量
         size--;
-
         return item;
     }
 
@@ -114,10 +109,9 @@ public class Stack<Item> implements Iterable<Item> {
      */
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder();
+        var s = new StringBuilder();
         for (Item item : this) {
-            s.append(item);
-            s.append(' ');
+            s.append(item).append(' ');
         }
         return s.toString();
     }
@@ -150,8 +144,7 @@ public class Stack<Item> implements Iterable<Item> {
         /**
          * 检查是否有下一个元素
          *
-         * @return {@code true} 有下一个元素
-         * {@code false} 没有下一个元素
+         * @return {@code true} 有下一个元素 {@code false} 没有下一个元素
          */
         @Override
         public boolean hasNext() {
@@ -176,8 +169,7 @@ public class Stack<Item> implements Iterable<Item> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-
-            Item item = current.item;
+            var item = current.item;
             current = current.next;
             return item;
         }
@@ -189,15 +181,17 @@ public class Stack<Item> implements Iterable<Item> {
      * @param args 命令行参数
      */
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
-            if (!item.equals("-")) {
+        var stack = new Stack<String>();
+        var scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            var item = scanner.next();
+            var dash = "-";
+            if (!item.equals(dash)) {
                 stack.push(item);
             } else if (!stack.isEmpty()) {
-                StdOut.print(stack.pop() + " ");
+                System.out.print(stack.pop() + " ");
             }
         }
-        StdOut.println("(" + stack.size() + " left on stack)");
+        System.out.println("(" + stack.size() + " left on stack)");
     }
 }
