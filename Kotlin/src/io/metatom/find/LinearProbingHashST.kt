@@ -156,7 +156,7 @@ class LinearProbingHashST<K, V>(cap: Int) {
 }
 
 // 单元测试
-fun main(args: Array<String>) {
+fun main() {
     val hashTable = LinearProbingHashST<String, Int>(10)
     for (i in 0 until 20) {
         hashTable.put(i.toString(), i)

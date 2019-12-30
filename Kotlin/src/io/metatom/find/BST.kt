@@ -281,7 +281,7 @@ class BST<K : Comparable<K>, V> {
 }
 
 // 单元测试
-fun main(args: Array<String>) {
+fun main() {
     val bst = BST<String, Int>()
     for (i in 0 until 5) bst.put(i.toString(), i)
 

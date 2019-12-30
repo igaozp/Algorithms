@@ -2,7 +2,7 @@ package io.metatom.graph
 
 import edu.princeton.cs.algs4.Graph
 import edu.princeton.cs.algs4.In
-import me.metatom.java.base.Stack
+import io.metatom.base.Stack
 
 /**
  * 使用深度优先搜索查找图中的路径

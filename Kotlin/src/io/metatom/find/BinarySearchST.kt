@@ -184,7 +184,7 @@ class BinarySearchST<K : Comparable<K>, V> constructor(capacity: Int) {
 }
 
 // 单元测试
-fun main(args: Array<String>) {
+fun main() {
     val st = BinarySearchST<String, Int>(2)
 
     for (i in 0 until 5) {

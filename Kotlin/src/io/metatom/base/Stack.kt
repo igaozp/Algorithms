@@ -1,7 +1,5 @@
 package io.metatom.base
 
-import edu.princeton.cs.algs4.Stack
-
 /**
  * Stack 链表的实现
  * Stack 是一种基于 LIFO 策略的集合类型
@@ -89,7 +87,7 @@ class Stack<Item> : Iterable<Item> {
 }
 
 // 单元测试
-fun main(args: Array<String>) {
+fun main() {
     val stack = Stack<String>()
     stack.push("1")
     stack.push("2")
@@ -98,7 +96,7 @@ fun main(args: Array<String>) {
     stack.push("5")
     println("size of stack = " + stack.size())
 
-    while (!stack.isEmpty) {
+    while (!stack.isEmpty()) {
         println(stack.pop())
     }
     println("size of stack = " + stack.size())

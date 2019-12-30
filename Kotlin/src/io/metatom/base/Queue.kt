@@ -1,6 +1,4 @@
-package io.metatom.base;
-
-import edu.princeton.cs.algs4.Queue
+package io.metatom.base
 
 /**
  * 使用链表实现的 Queue 队列
@@ -99,7 +97,7 @@ class Queue<Item> : Iterable<Item> {
 }
 
 // 单元测试
-fun main(args: Array<String>) {
+fun main() {
     val queue = Queue<String>()
     queue.enqueue("Hello")
     queue.enqueue("World")
@@ -107,7 +105,7 @@ fun main(args: Array<String>) {
     println("size of queue = " + queue.size())
     queue.forEach { i -> println(i) }
 
-    while (!queue.isEmpty) {
+    while (!queue.isEmpty()) {
         queue.dequeue()
     }
     println("size of queue = " + queue.size())

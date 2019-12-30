@@ -417,7 +417,7 @@ class RedBlackBST<K : Comparable<K>, V> {
 }
 
 // 单元测试
-fun main(args: Array<String>) {
+fun main() {
     val st = RedBlackBST<String, Int>()
     for (i in 0 until 10) {
         st.put(i.toString(), i)

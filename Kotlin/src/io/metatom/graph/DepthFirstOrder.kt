@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.Digraph
 import edu.princeton.cs.algs4.EdgeWeightedDigraph
 import edu.princeton.cs.algs4.In
 import edu.princeton.cs.algs4.Stack
-import me.metatom.java.base.Queue
+import io.metatom.base.Queue
 
 /**
  * 有向图中基于深度优先搜索的顶点排序

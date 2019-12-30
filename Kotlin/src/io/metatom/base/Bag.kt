@@ -57,7 +57,7 @@ class Bag<Item> : Iterable<Item> {
 }
 
 // 单元测试
-fun main(args: Array<String>) {
+fun main() {
     val bag = Bag<String>()
     bag.add("Hello")
     bag.add("World")

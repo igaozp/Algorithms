@@ -86,7 +86,7 @@ class SeparateChainingHashST<K, V>(private var M: Int) {
 }
 
 // 单元测试
-fun main(args: Array<String>) {
+fun main() {
     val st = SeparateChainingHashST<String, Int>(10)
     for (i in 0 until 10) st.put(i.toString(), i)
 
