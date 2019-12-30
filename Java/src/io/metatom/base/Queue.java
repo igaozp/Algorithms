@@ -1,10 +1,8 @@
 package io.metatom.base;
 
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 /**
  * 使用链表实现的 Queue 队列
@@ -50,8 +48,7 @@ public class Queue<Item> implements Iterable<Item> {
     /**
      * 检查队列是否为空
      *
-     * @return {@code true} 队列为空
-     * {@code false} 队列不为空
+     * @return {@code true} 队列为空 {@code false} 队列不为空
      */
     public boolean isEmpty() {
         return this.first == null;
@@ -75,7 +72,6 @@ public class Queue<Item> implements Iterable<Item> {
         if (isEmpty()) {
             throw new NoSuchElementException("Queue underflow");
         }
-
         return first.item;
     }
 
@@ -86,7 +82,7 @@ public class Queue<Item> implements Iterable<Item> {
      */
     public void enqueue(Item item) {
         // 新增节点
-        Node<Item> oldLast = this.last;
+        var oldLast = this.last;
         this.last = new Node<>();
         this.last.item = item;
         this.last.next = null;
@@ -109,7 +105,6 @@ public class Queue<Item> implements Iterable<Item> {
         if (isEmpty()) {
             throw new NoSuchElementException("Queue underflow");
         }
-
         // 获取队列首节点元素，并使下一个元素成为队列的首节点
         Item item = this.first.item;
         this.first = this.first.next;
@@ -165,8 +160,7 @@ public class Queue<Item> implements Iterable<Item> {
         /**
          * 检查是否有下一个元素
          *
-         * @return {@code true} 有下一个元素
-         * {@code false} 没有下一个元素
+         * @return {@code true} 有下一个元素 {@code false} 没有下一个元素
          */
         @Override
         public boolean hasNext() {
@@ -174,7 +168,7 @@ public class Queue<Item> implements Iterable<Item> {
         }
 
         /**
-         * 元素移除方法
+         * 元素移除方法（暂不支持）
          */
         @Override
         public void remove() {
@@ -194,16 +188,23 @@ public class Queue<Item> implements Iterable<Item> {
         }
     }
 
+    /**
+     * 单元测试
+     *
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
-        Queue<String> queue = new Queue<>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
-            if (!item.equals("-")) {
+        var queue = new Queue<String>();
+        var scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            var item = scanner.next();
+            var dash = "-";
+            if (!item.equals(dash)) {
                 queue.enqueue(item);
             } else if (!queue.isEmpty()) {
-                StdOut.println(queue.dequeue() + " ");
+                System.out.println(queue.dequeue() + " ");
             }
         }
-        StdOut.println("(" + queue.size() + " left on queue)");
+        System.out.println("(" + queue.size() + " left on queue)");
     }
 }
