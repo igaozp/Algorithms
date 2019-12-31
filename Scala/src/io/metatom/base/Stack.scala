@@ -1,4 +1,4 @@
-package io.metatom.scala.base
+package io.metatom.base
 
 /**
   * Stack 链表的实现
@@ -6,26 +6,17 @@ package io.metatom.scala.base
   *
   * @author igaozp
   * @since 2019-01-22
-  * @param manifest Manifest
   * @tparam T 泛型参数
   */
-class Stack[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
+class Stack[T] {
   /**
     * 栈的顶部节点
     */
-  private var first: Node = _
+  private var first: Node[T] = _
   /**
     * 栈的节点元素数量
     */
   private var size = 0
-
-  /**
-    * 内部的链表节点类
-    */
-  class Node {
-    var item: T = manifest.runtimeClass.getConstructor().newInstance().asInstanceOf[T]
-    var next: Node = _
-  }
 
   /**
     * 检查栈是否为空
@@ -85,6 +76,16 @@ class Stack[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
     }
     first.item
   }
+}
+
+/**
+  * 节点类
+  *
+  * @tparam T 泛型参数
+  */
+private class Node[T] {
+  var item: T = _
+  var next: Node[T] = _
 }
 
 object Stack {

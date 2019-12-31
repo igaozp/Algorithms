@@ -1,6 +1,4 @@
-package io.metatom.scala.base
-
-import scala.reflect.Manifest
+package io.metatom.base
 
 /**
   * Bag 的链表实现
@@ -11,23 +9,15 @@ import scala.reflect.Manifest
   * @version 1.0
   * @tparam T 泛型参数
   */
-class Bag[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
+class Bag[T] {
   /**
     * 链表首节点
     */
-  private var first = new Node
+  private var first = new Node[T]
   /**
     * Bag 的元素数量
     */
   private var size = 0
-
-  /**
-    * 内部节点类
-    */
-  class Node {
-    var item: T = manifest.runtimeClass.getConstructor().newInstance().asInstanceOf[T]
-    var next: Node = _
-  }
 
   /**
     * 检查是否为空
@@ -50,13 +40,24 @@ class Bag[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
     * @param item 添加的元素对象
     */
   def add(item: T): Unit = {
-    val oldFirst: Node = first
-    first = new Node
+    val oldFirst: Node[T] = first
+    first = new Node[T]
     first.item = item
     first.next = oldFirst
     size += 1
   }
 }
+
+/**
+  * 节点类
+  *
+  * @tparam T 泛型参数
+  */
+private class Node[T] {
+  var item: T = _
+  var next: Node[T] = _
+}
+
 
 object Bag {
   /**

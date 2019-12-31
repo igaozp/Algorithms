@@ -1,34 +1,25 @@
-package io.metatom.scala.base
+package io.metatom.base
 
 /**
   * 使用链表实现的 Queue 队列
   * Queue 队列是一种基于 FIFO 策略的集合类型
   *
   * @author igaozp
-  * @param manifest Manifest
   * @tparam T 泛型
   */
-class Queue[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
+class Queue[T] {
   /**
     * 队列的首节点
     */
-  private var first: Node = _
+  private var first: Node[T] = _
   /**
     * 队列的最后一个节点
     */
-  private var last: Node = _
+  private var last: Node[T] = _
   /**
     * 队列元素的数量
     */
   private var size = 0
-
-  /**
-    * 内部的链表节点类
-    */
-  class Node {
-    var item: T = manifest.runtimeClass.getConstructor().newInstance().asInstanceOf[T]
-    var next: Node = _
-  }
 
   /**
     * 检查队列是否为空
@@ -98,6 +89,16 @@ class Queue[T >: Null <: AnyRef](implicit manifest: Manifest[T]) {
     size -= 1
     item
   }
+}
+
+/**
+  * 节点类
+  *
+  * @tparam T 泛型参数
+  */
+private class Node[T] {
+  var item: T = _
+  var next: Node[T] = _
 }
 
 object Queue {
