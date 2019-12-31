@@ -1,7 +1,6 @@
 package io.metatom.find;
 
 import edu.princeton.cs.algs4.Queue;
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.NoSuchElementException;
@@ -18,7 +17,7 @@ import java.util.Scanner;
  * @since 2017-07-05
  */
 @SuppressWarnings("unused")
-public class BST<Key extends Comparable<Key>, Value> {
+public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     /**
      * 二叉树的根节点
      */
@@ -50,14 +49,13 @@ public class BST<Key extends Comparable<Key>, Value> {
     /**
      * 默认的无参的构造方法
      */
-    public BST() {
+    public BinarySearchTree() {
     }
 
     /**
      * 检查二叉查找树是否为空
      *
-     * @return {@code true} 二叉树为空
-     * {@code false} 二叉树不为空
+     * @return {@code true} 二叉树为空 {@code false} 二叉树不为空
      */
     public boolean isEmpty() {
         return size() == 0;
@@ -110,7 +108,6 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (x == null) {
             return null;
         }
-
         // 递归查找相应的键
         int cmp = key.compareTo(x.key);
         if (cmp < 0) {
@@ -152,7 +149,6 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (x == null) {
             return new Node(key, val, 1);
         }
-
         int cmp = key.compareTo(x.key);
         if (cmp < 0) {
             x.left = put(x.left, key, val);
@@ -477,20 +473,20 @@ public class BST<Key extends Comparable<Key>, Value> {
     /**
      * 根据键的范围获取范围内的键
      *
-     * @param lo 开始范围
-     * @param hi 结束范围
+     * @param low  开始范围
+     * @param high 结束范围
      * @return 包含键的队列
      */
-    private Iterable<Key> keys(Key lo, Key hi) {
-        if (lo == null) {
+    private Iterable<Key> keys(Key low, Key high) {
+        if (low == null) {
             throw new IllegalArgumentException("first argument to keys() is null");
         }
-        if (hi == null) {
+        if (high == null) {
             throw new IllegalArgumentException("second argument to keys() is null");
         }
 
         Queue<Key> queue = new Queue<>();
-        keys(root, queue, lo, hi);
+        keys(root, queue, low, high);
         return queue;
     }
 
@@ -499,23 +495,23 @@ public class BST<Key extends Comparable<Key>, Value> {
      *
      * @param x     指定的节点
      * @param queue 存储键的队列
-     * @param lo    开始范围
-     * @param hi    结束范围
+     * @param low   开始范围
+     * @param high  结束范围
      */
-    private void keys(Node x, Queue<Key> queue, Key lo, Key hi) {
+    private void keys(Node x, Queue<Key> queue, Key low, Key high) {
         if (x == null) {
             return;
         }
-        int cmpLo = lo.compareTo(x.key);
-        int cmpHi = hi.compareTo(x.key);
+        int cmpLo = low.compareTo(x.key);
+        int cmpHi = high.compareTo(x.key);
         if (cmpLo < 0) {
-            keys(x.left, queue, lo, hi);
+            keys(x.left, queue, low, high);
         }
         if (cmpLo <= 0 && cmpHi >= 0) {
             queue.enqueue(x.key);
         }
         if (cmpHi > 0) {
-            keys(x.right, queue, lo, hi);
+            keys(x.right, queue, low, high);
         }
     }
 
@@ -547,8 +543,8 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return 层次遍历序列
      */
     public Iterable<Key> levelOrder() {
-        Queue<Key> keys = new Queue<>();
-        Queue<Node> queue = new Queue<>();
+        var keys = new Queue<Key>();
+        var queue = new Queue<Node>();
         queue.enqueue(root);
         while (!queue.isEmpty()) {
             Node x = queue.dequeue();
@@ -569,7 +565,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      * {@code false} 不完整
      */
     private boolean check() {
-        if (!isBST()) {
+        if (!isBinarySearchTree()) {
             StdOut.println("Not in symmetric order");
         }
         if (!isSizeConsistent()) {
@@ -578,17 +574,16 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (!isRankConsistent()) {
             StdOut.println("Ranks not consistent");
         }
-        return isBST() && isSizeConsistent() && isRankConsistent();
+        return isBinarySearchTree() && isSizeConsistent() && isRankConsistent();
     }
 
     /**
      * 检查该树是否是二叉树
      *
-     * @return {@code true} 是二叉树
-     * {@code false} 不是二叉树
+     * @return {@code true} 是二叉树 {@code false} 不是二叉树
      */
-    private boolean isBST() {
-        return isBST(root, null, null);
+    private boolean isBinarySearchTree() {
+        return isBinarySearchTree(root, null, null);
     }
 
     /**
@@ -597,10 +592,9 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @param x   指定的节点
      * @param min 最小范围
      * @param max 最大范围
-     * @return {@code true} 是二叉树
-     * {@code false} 不是二叉树
+     * @return {@code true} 是二叉树 {@code false} 不是二叉树
      */
-    private boolean isBST(Node x, Key min, Key max) {
+    private boolean isBinarySearchTree(Node x, Key min, Key max) {
         if (x == null) {
             return true;
         }
@@ -612,14 +606,13 @@ public class BST<Key extends Comparable<Key>, Value> {
             return false;
         }
 
-        return isBST(x.left, min, x.key) && isBST(x.right, x.key, max);
+        return isBinarySearchTree(x.left, min, x.key) && isBinarySearchTree(x.right, x.key, max);
     }
 
     /**
      * 检查二叉树的大小是否一致
      *
-     * @return {@code true} 一致
-     * {@code false} 不一致
+     * @return {@code true} 一致 {@code false} 不一致
      */
     private boolean isSizeConsistent() {
         return isSizeConsistent(root);
@@ -629,8 +622,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      * 检查指定节点下的二叉树的大小是否一致
      *
      * @param x 指定的节点
-     * @return {@code true} 一致
-     * {@code false} 不一致
+     * @return {@code true} 一致 {@code false} 不一致
      */
     private boolean isSizeConsistent(Node x) {
         if (x == null) {
@@ -645,8 +637,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     /**
      * 检测 {@code rank()} 的一致性
      *
-     * @return {@code true} 一致
-     * {@code false} 不一致
+     * @return {@code true} 一致 {@code false} 不一致
      */
     private boolean isRankConsistent() {
         for (int i = 0; i < size(); i++) {
@@ -668,18 +659,17 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @param args 命令行参数
      */
     public static void main(String[] args) {
-        BST<String, Integer> bst = new BST<>();
+        var bst = new BinarySearchTree<String, Integer>();
 
-        int size;
         Scanner scanner = new Scanner(System.in);
-        size = scanner.nextInt();
+        var size = scanner.nextInt();
 
         for (int i = 0; i < size; i++) {
-            String key = StdIn.readString();
+            var key = scanner.next();
             bst.put(key, i);
         }
 
-        for (String s : bst.keys()) {
+        for (var s : bst.keys()) {
             System.out.println(s + " " + bst.get(s));
         }
     }
